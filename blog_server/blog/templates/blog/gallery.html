@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+{% for g in gallery%}
+    <p>{{ g.user }}</p>
+    <a>
+        <img src="{{ g.img_url }}">
+    </a>
+    <a>
+        <img src="{{ g.char_img_url }}">
+    </a>
+{% endfor %}
+</body>
+</html>
