@@ -2,18 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>画廊</title>
 </head>
 <body>
 
 {% for g in gallery%}
-    <p>{{ g.user }}</p>
-    <a>
-        <img src="{{ g.img_url }}">
-    </a>
-    <a>
-        <img src="{{ g.char_img_url }}">
-    </a>
+{#    <p>{{ g.user }}</p>#}
+    <p><b>你的画廊</b></p>
+    <p>
+       {{ g.create_time }}
+    </p>
+    <p style="width:100%;height: auto">
+        <a>
+
+            <img src="{{ g.img_url }}" style="width:49%;height: auto">
+        </a>
+        <a>
+
+            <img src="{{ g.char_img_url }}" style="width:49%;height: auto">
+        </a>
+    </p>
+    <br>
+
 {% endfor %}
 </body>
 </html>
