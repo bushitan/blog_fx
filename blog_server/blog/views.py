@@ -49,15 +49,20 @@ class GalleryView(BaseMixin, ListView):
 
     def get_context_data(self, **kwargs):
         #查open_id 下，所有的图片做展示
-        _open_id = self.kwargs.get('open_id', '')
-        print _open_id,'ok'
-        if User.objects.filter(openid_wx = _open_id).exists():
-            user = User.objects.get(openid_wx = _open_id)
-            kwargs['gallery'] = Gallery.objects.filter(user = user)
+        # _open_id = self.kwargs.get('open_id', '')
+
+
         return super(GalleryView, self).get_context_data(**kwargs)
     def get_queryset(self):
         pass
     def get(self, request, *args, **kwargs):
+        _open_id = request.GET.get('open_id')
+
+        print _open_id,'ok'
+        if User.objects.filter(openid_wx = _open_id).exists():
+            user = User.objects.get(openid_wx = _open_id)
+            kwargs['gallery'] = Gallery.objects.filter(user = user)
+
         return super(GalleryView, self).get(request, *args, **kwargs)
 
 
