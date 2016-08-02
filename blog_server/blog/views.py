@@ -46,22 +46,23 @@ class IndexView(BaseMixin, ListView):
 class GalleryView(BaseMixin, ListView):
     template_name = 'blog/gallery.html'
     # context_object_name = 'article_list'
-
+    open_id = ''
     def get_context_data(self, **kwargs):
         #查open_id 下，所有的图片做展示
         # _open_id = self.kwargs.get('open_id', '')
-
+        _open_id = self.open_id
+        if User.objects.filter(openid_wx = _open_id).exists():
+            print 1
+            user = User.objects.get(openid_wx = _open_id)
+            print user
+            kwargs['gallery'] = Gallery.objects.filter(user = user)
+            print kwargs['gallery']
 
         return super(GalleryView, self).get_context_data(**kwargs)
     def get_queryset(self):
         pass
     def get(self, request, *args, **kwargs):
-        _open_id = request.GET.get('open_id')
-
-        print _open_id,'ok'
-        if User.objects.filter(openid_wx = _open_id).exists():
-            user = User.objects.get(openid_wx = _open_id)
-            kwargs['gallery'] = Gallery.objects.filter(user = user)
+        self.open_id = request.GET.get('open_id')
 
         return super(GalleryView, self).get(request, *args, **kwargs)
 
