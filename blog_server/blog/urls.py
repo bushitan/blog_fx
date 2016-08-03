@@ -9,4 +9,5 @@ urlpatterns = [
 
    url(r'^artwork/$', ArtworkView.as_view()),
 
+   url(r'^game/$', GameView.as_view()),
 ]

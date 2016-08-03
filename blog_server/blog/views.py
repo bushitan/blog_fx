@@ -61,7 +61,7 @@ class GalleryView(BaseMixin, ListView):
         return super(GalleryView, self).get(request, *args, **kwargs)
 
 
-#作品展示
+#增加新作品
 class ArtworkView(BaseMixin, ListView):
     def get_context_data(self, **kwargs):
         # pass
@@ -105,3 +105,21 @@ class ArtworkView(BaseMixin, ListView):
         #添加2条url
         # pass
 
+
+#小游戏
+class GameView(BaseMixin, ListView):
+    template_name = 'game/canvas_circle_event.html'
+    # context_object_name = 'article_list'
+
+    def get_context_data(self, **kwargs):
+        #查open_id 下，所有的图片做展示
+        _open_id = self.kwargs.get('open_id', '')
+        print _open_id,'ok'
+        if User.objects.filter(openid_wx = _open_id).exists():
+            user = User.objects.get(openid_wx = _open_id)
+            kwargs['gallery'] = Gallery.objects.filter(user = user)
+        return super(GameView, self).get_context_data(**kwargs)
+    def get_queryset(self):
+        pass
+    def get(self, request, *args, **kwargs):
+        return super(GameView, self).get(request, *args, **kwargs)
