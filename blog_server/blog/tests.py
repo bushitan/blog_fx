@@ -6,12 +6,14 @@ if __name__ == '__main__':
     #http://127.0.0.1:8000/art/wx_img_str
     httpClient = None
     try:
-        url = 'http://127.0.0.1:8000/blog/artwork/'
+        # url = 'http://127.0.0.1:8000/blog/artwork/'
+        url = 'http://120.27.97.33:82/blog/artwork/'
+
 
         data  = {
-            "open_id":12,
-            "img_url":"http://mmbiz.qpic.cn/mmbiz/EmT9585IibD0V5dic327aVTjBFr1PgAcdzb7SDPK0Ndo3qqm26wHn6s4Qpf5TddjtpNFRrmL8CBb8Q64XuN13v4Q/0",
-            "char_img_url": 'https://ss0.baidu.com/73t1bjeh1BF3odCf/it/u=2050787984,3198270160&fm=85&s=4EC0DC10B4FAE429207A30D9030070B3'
+            "open_id":13,
+            "img_url":"http://h.hiphotos.baidu.com/zhidao/wh%3D600%2C800/sign=546fe1ddb1119313c716f7b6550820ef/0b7b02087bf40ad165f5e8fc542c11dfa9ecce9f.jpg",
+            "char_img_url": 'http://zhidao.baidu.com/daily/view?id=18711'
         }
 
         req = urllib2.Request(url)

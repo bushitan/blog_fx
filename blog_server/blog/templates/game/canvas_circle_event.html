@@ -18,16 +18,23 @@ canvas {
 
 </style>
 
-<script src="/static/js/similar_color.js"></script>
+{#<script src="/static/js/similar_color.js"></script>#}
+<script src="/static/js/active_circle.js"></script>
 
 <body>
 
-  <canvas id="canvas" width="400" height="300">
-  </canvas>
+    <div class="background" style="background-image: url(http://avatar.csdn.net/F/7/B/1_sadfishsc.jpg); width: 200px; height: 200px;">
+
+        <canvas id="canvas" width="200px" height="200px" style="width:100%;height:100%">
+        </canvas>
+    </div>
+
 
   <div>
-    <button onclick="addRandomCircle()">Add Circle</button>
-    <button onclick="clearCanvas()">Clear Canvas</button>
+{#    <button onclick="addRandomCircle()">Add Circle</button>#}
+{#    <button onclick="clearCanvas()">Clear Canvas</button>#}
+    <button >Add Circle</button>
+    <button id="clear">Clear Canvas</button>
   </div>
 
 

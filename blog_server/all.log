@@ -332,3 +332,147 @@ Traceback (most recent call last):
   File "E:\Carcer World\code\Python\git\blog_fx\blog_server\blog\views.py", line 63, in get_queryset
     
 AttributeError: 'QuerySet' object has no attribute 'user'
+[2016-08-02 09:12:13,055] [ERROR] base : Internal Server Error: /blog/gallery/
+Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\django-1.8.5-py2.7.egg\django\core\handlers\base.py", line 119, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "C:\Python27\lib\site-packages\django-1.8.5-py2.7.egg\django\core\urlresolvers.py", line 365, in resolve
+    for pattern in self.url_patterns:
+  File "C:\Python27\lib\site-packages\django-1.8.5-py2.7.egg\django\core\urlresolvers.py", line 401, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "C:\Python27\lib\site-packages\django-1.8.5-py2.7.egg\django\core\urlresolvers.py", line 395, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "C:\Python27\lib\importlib\__init__.py", line 37, in import_module
+    __import__(name)
+  File "E:\Carcer World\code\Python\git\blog_fx\blog_server\blog_server\urls.py", line 22, in <module>
+    url(r'^blog/', include('blog.urls')),
+  File "C:\Python27\lib\site-packages\django-1.8.5-py2.7.egg\django\conf\urls\__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "C:\Python27\lib\importlib\__init__.py", line 37, in import_module
+    __import__(name)
+  File "E:\Carcer World\code\Python\git\blog_fx\blog_server\blog\urls.py", line 4, in <module>
+    from blog.views import *
+  File "E:\Carcer World\code\Python\git\blog_fx\blog_server\blog\views.py", line 53
+    _open_id = self.
+                   ^
+SyntaxError: invalid syntax
+[2016-08-02 09:12:13,055] [ERROR] base : Internal Server Error: /blog/gallery/
+Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\django-1.8.5-py2.7.egg\django\core\handlers\base.py", line 119, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "C:\Python27\lib\site-packages\django-1.8.5-py2.7.egg\django\core\urlresolvers.py", line 365, in resolve
+    for pattern in self.url_patterns:
+  File "C:\Python27\lib\site-packages\django-1.8.5-py2.7.egg\django\core\urlresolvers.py", line 401, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "C:\Python27\lib\site-packages\django-1.8.5-py2.7.egg\django\core\urlresolvers.py", line 395, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "C:\Python27\lib\importlib\__init__.py", line 37, in import_module
+    __import__(name)
+  File "E:\Carcer World\code\Python\git\blog_fx\blog_server\blog_server\urls.py", line 22, in <module>
+    url(r'^blog/', include('blog.urls')),
+  File "C:\Python27\lib\site-packages\django-1.8.5-py2.7.egg\django\conf\urls\__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "C:\Python27\lib\importlib\__init__.py", line 37, in import_module
+    __import__(name)
+  File "E:\Carcer World\code\Python\git\blog_fx\blog_server\blog\urls.py", line 4, in <module>
+    from blog.views import *
+  File "E:\Carcer World\code\Python\git\blog_fx\blog_server\blog\views.py", line 53
+    _open_id = self.
+                   ^
+SyntaxError: invalid syntax
+[2016-08-02 09:12:13,585] [ERROR] base : Internal Server Error: /blog/gallery/
+Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\django-1.8.5-py2.7.egg\django\core\handlers\base.py", line 119, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "C:\Python27\lib\site-packages\django-1.8.5-py2.7.egg\django\core\urlresolvers.py", line 365, in resolve
+    for pattern in self.url_patterns:
+  File "C:\Python27\lib\site-packages\django-1.8.5-py2.7.egg\django\core\urlresolvers.py", line 401, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "C:\Python27\lib\site-packages\django-1.8.5-py2.7.egg\django\core\urlresolvers.py", line 395, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "C:\Python27\lib\importlib\__init__.py", line 37, in import_module
+    __import__(name)
+  File "E:\Carcer World\code\Python\git\blog_fx\blog_server\blog_server\urls.py", line 22, in <module>
+    url(r'^blog/', include('blog.urls')),
+  File "C:\Python27\lib\site-packages\django-1.8.5-py2.7.egg\django\conf\urls\__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "C:\Python27\lib\importlib\__init__.py", line 37, in import_module
+    __import__(name)
+  File "E:\Carcer World\code\Python\git\blog_fx\blog_server\blog\urls.py", line 4, in <module>
+    from blog.views import *
+  File "E:\Carcer World\code\Python\git\blog_fx\blog_server\blog\views.py", line 53
+    _open_id = self.
+                   ^
+SyntaxError: invalid syntax
+[2016-08-02 09:12:13,585] [ERROR] base : Internal Server Error: /blog/gallery/
+Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\django-1.8.5-py2.7.egg\django\core\handlers\base.py", line 119, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "C:\Python27\lib\site-packages\django-1.8.5-py2.7.egg\django\core\urlresolvers.py", line 365, in resolve
+    for pattern in self.url_patterns:
+  File "C:\Python27\lib\site-packages\django-1.8.5-py2.7.egg\django\core\urlresolvers.py", line 401, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "C:\Python27\lib\site-packages\django-1.8.5-py2.7.egg\django\core\urlresolvers.py", line 395, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "C:\Python27\lib\importlib\__init__.py", line 37, in import_module
+    __import__(name)
+  File "E:\Carcer World\code\Python\git\blog_fx\blog_server\blog_server\urls.py", line 22, in <module>
+    url(r'^blog/', include('blog.urls')),
+  File "C:\Python27\lib\site-packages\django-1.8.5-py2.7.egg\django\conf\urls\__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "C:\Python27\lib\importlib\__init__.py", line 37, in import_module
+    __import__(name)
+  File "E:\Carcer World\code\Python\git\blog_fx\blog_server\blog\urls.py", line 4, in <module>
+    from blog.views import *
+  File "E:\Carcer World\code\Python\git\blog_fx\blog_server\blog\views.py", line 53
+    _open_id = self.
+                   ^
+SyntaxError: invalid syntax
+[2016-08-02 09:12:15,864] [ERROR] base : Internal Server Error: /blog/gallery/
+Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\django-1.8.5-py2.7.egg\django\core\handlers\base.py", line 119, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "C:\Python27\lib\site-packages\django-1.8.5-py2.7.egg\django\core\urlresolvers.py", line 365, in resolve
+    for pattern in self.url_patterns:
+  File "C:\Python27\lib\site-packages\django-1.8.5-py2.7.egg\django\core\urlresolvers.py", line 401, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "C:\Python27\lib\site-packages\django-1.8.5-py2.7.egg\django\core\urlresolvers.py", line 395, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "C:\Python27\lib\importlib\__init__.py", line 37, in import_module
+    __import__(name)
+  File "E:\Carcer World\code\Python\git\blog_fx\blog_server\blog_server\urls.py", line 22, in <module>
+    url(r'^blog/', include('blog.urls')),
+  File "C:\Python27\lib\site-packages\django-1.8.5-py2.7.egg\django\conf\urls\__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "C:\Python27\lib\importlib\__init__.py", line 37, in import_module
+    __import__(name)
+  File "E:\Carcer World\code\Python\git\blog_fx\blog_server\blog\urls.py", line 4, in <module>
+    from blog.views import *
+  File "E:\Carcer World\code\Python\git\blog_fx\blog_server\blog\views.py", line 53
+    _open_id = self.
+                   ^
+SyntaxError: invalid syntax
+[2016-08-02 09:12:15,864] [ERROR] base : Internal Server Error: /blog/gallery/
+Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\django-1.8.5-py2.7.egg\django\core\handlers\base.py", line 119, in get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "C:\Python27\lib\site-packages\django-1.8.5-py2.7.egg\django\core\urlresolvers.py", line 365, in resolve
+    for pattern in self.url_patterns:
+  File "C:\Python27\lib\site-packages\django-1.8.5-py2.7.egg\django\core\urlresolvers.py", line 401, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "C:\Python27\lib\site-packages\django-1.8.5-py2.7.egg\django\core\urlresolvers.py", line 395, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "C:\Python27\lib\importlib\__init__.py", line 37, in import_module
+    __import__(name)
+  File "E:\Carcer World\code\Python\git\blog_fx\blog_server\blog_server\urls.py", line 22, in <module>
+    url(r'^blog/', include('blog.urls')),
+  File "C:\Python27\lib\site-packages\django-1.8.5-py2.7.egg\django\conf\urls\__init__.py", line 33, in include
+    urlconf_module = import_module(urlconf_module)
+  File "C:\Python27\lib\importlib\__init__.py", line 37, in import_module
+    __import__(name)
+  File "E:\Carcer World\code\Python\git\blog_fx\blog_server\blog\urls.py", line 4, in <module>
+    from blog.views import *
+  File "E:\Carcer World\code\Python\git\blog_fx\blog_server\blog\views.py", line 53
+    _open_id = self.
+                   ^
+SyntaxError: invalid syntax
