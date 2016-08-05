@@ -20,6 +20,7 @@ canvas {
 
 {#<script src="/static/js/similar_color.js"></script>#}
 <script src="/static/js/active_circle.js"></script>
+<script src="/static/jquery/jquery-2.1.3.min.js"></script>
 
 <body>
 
@@ -33,11 +34,31 @@ canvas {
   <div>
 {#    <button onclick="addRandomCircle()">Add Circle</button>#}
 {#    <button onclick="clearCanvas()">Clear Canvas</button>#}
-    <button >Add Circle</button>
+    <button id="add">Add Circle</button>
     <button id="clear">Clear Canvas</button>
   </div>
 
 
 </body>
 
+<script language="javascript" type="text/javascript">
+		//创建note
+		$('#add').submit(function() {
+            $.ajax({
+                type: "POST",
+                url: 'http://127.0.0.1:8000/grid/api/game/',
+                data:{  "img_url":"http://127.0.0.1:8000/static/art/img/20160706154153.png"},
+				success:function(data,textStatus){
+					console.log(data);
+{#					window.location.href = data.url;#}
+				},
+				error:function(XMLHttpRequest, textStatus, errorThrown){
+					alert(XMLHttpRequest.responseText);
+				}
+
+            })
+
+        })
+
+</script>
 </html>
