@@ -111,7 +111,7 @@ class ArtworkView(BaseMixin, ListView):
         #添加2条url
         # pass
 
-
+import httplib, urllib,urllib2
 #小游戏
 class GameView(BaseMixin, ListView):
     template_name = 'game/canvas_circle_event.html'
@@ -129,3 +129,32 @@ class GameView(BaseMixin, ListView):
         pass
     def get(self, request, *args, **kwargs):
         return super(GameView, self).get(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+
+
+        httpClient = None
+        try:
+            url = 'http://127.0.0.1:8000/grid/api/game/'
+            data  = {  "img_url":"http://127.0.0.1:8000/static/art/img/20160706154153.png"}
+            req = urllib2.Request(url)
+            data = urllib.urlencode(data)
+            #enable cookie
+            opener = urllib2.build_opener(urllib2.HTTPCookieProcessor())
+            response = opener.open(req,data)
+            res = response.read()
+            # print res
+            return HttpResponse(
+                json.dumps(res),
+                content_type="application/json"
+            )
+            # obj = json.loads(res)
+            # print obj['img_url']
+            # print obj['str_url']
+        except Exception, e:
+            print e
+        finally:
+            if httpClient:
+                httpClient.close()
+
+
