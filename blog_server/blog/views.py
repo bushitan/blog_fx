@@ -130,31 +130,76 @@ class GameView(BaseMixin, ListView):
     def get(self, request, *args, **kwargs):
         return super(GameView, self).get(request, *args, **kwargs)
 
+    #跟数据库拿数据
     def post(self, request, *args, **kwargs):
 
+        # if Game.objects.get(id = 2).exists() :
+        g = Game.objects.get(id = 5)
+        # print g.circle
+        dict = {
+            'circle' : g.circle,
+            'color' : g.color,
+            'img_url' : g.img_url,
+            'str_url' : g.str_url,
+            'stage' : g.stage
+        }
+        # print str(dict)
+        return HttpResponse(
+            json.dumps(dict),
+            content_type="application/json"
+        )
+        # httpClient = None
+        # try:
+        #     url = 'http://127.0.0.1:8000/grid/api/game/'
+        #     data  = {  "img_url":"http://127.0.0.1:8000/static/art/img/20160706154153.png"}
+        #     req = urllib2.Request(url)
+        #     data = urllib.urlencode(data)
+        #     #enable cookie
+        #     opener = urllib2.build_opener(urllib2.HTTPCookieProcessor())
+        #     response = opener.open(req,data)
+        #     res = response.read()
+        #     # print res
+        #     return HttpResponse(
+        #         json.dumps(res),
+        #         content_type="application/json"
+        #     )
+        #     # obj = json.loads(res)
+        #     # print obj['img_url']
+        #     # print obj['str_url']
+        # except Exception, e:
+        #     print e
+        # finally:
+        #     if httpClient:
+        #         httpClient.close()
 
-        httpClient = None
-        try:
-            url = 'http://127.0.0.1:8000/grid/api/game/'
-            data  = {  "img_url":"http://127.0.0.1:8000/static/art/img/20160706154153.png"}
-            req = urllib2.Request(url)
-            data = urllib.urlencode(data)
-            #enable cookie
-            opener = urllib2.build_opener(urllib2.HTTPCookieProcessor())
-            response = opener.open(req,data)
-            res = response.read()
-            # print res
-            return HttpResponse(
-                json.dumps(res),
-                content_type="application/json"
-            )
-            # obj = json.loads(res)
-            # print obj['img_url']
-            # print obj['str_url']
-        except Exception, e:
-            print e
-        finally:
-            if httpClient:
-                httpClient.close()
 
+class GameAddView(BaseMixin, ListView):
+    # template_name = 'game/canvas_circle_event.html'
+    # context_object_name = 'article_list'
+    def get_context_data(self, **kwargs):
+        return super(GameAddView, self).get_context_data(**kwargs)
+    def get_queryset(self):
+        pass
+    def post(self, request, *args, **kwargs):
+        _circle = str(self.request.POST.get('circle', ''))
+        _color = str(self.request.POST.get('color', ''))
+        _img_url = str(self.request.POST.get('img_url', ''))
+        _str_url = str(self.request.POST.get('str_url', ''))
+        _stage = str(self.request.POST.get('stage', ''))
+
+        print _circle,_stage
+
+        g = Game(
+            circle = _circle.encode('utf-8') ,
+            color = _color,
+            img_url = _img_url,
+            str_url = _str_url,
+            stage = _stage
+        )
+        g.save()
+
+        return HttpResponse(
+            json.dumps({'a':1}),
+            content_type="application/json"
+        )
 

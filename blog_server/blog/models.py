@@ -37,3 +37,15 @@ class Gallery(models.Model):
         verbose_name_plural = verbose_name = u'画廊'
         ordering = ['-create_time']
         app_label = string_with_title('blog', u"博客")
+
+
+class Game(models.Model):
+    circle = models.TextField(verbose_name=u'圆圈位置')
+    color = models.TextField(verbose_name=u'颜色')
+    img_url = models.TextField(verbose_name=u'原图url')
+    str_url = models.TextField(verbose_name=u'字符画url')
+    stage = models.TextField(verbose_name=u'舞台')
+    class Meta:
+        verbose_name_plural = verbose_name = u'游戏数据'
+        # ordering = ['-create_time']
+        app_label = string_with_title('blog', u"博客")

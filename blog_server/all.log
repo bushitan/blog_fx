@@ -476,3 +476,111 @@ Traceback (most recent call last):
     _open_id = self.
                    ^
 SyntaxError: invalid syntax
+[2016-08-05 20:13:34,621] [ERROR] base : Internal Server Error: /blog/game/
+Traceback (most recent call last):
+  File "D:\Python27\lib\site-packages\django\core\handlers\base.py", line 151, in get_response
+    % (callback.__module__, view_name))
+ValueError: The view blog.views.GameView didn't return an HttpResponse object. It returned None instead.
+[2016-08-05 20:13:34,621] [ERROR] base : Internal Server Error: /blog/game/
+Traceback (most recent call last):
+  File "D:\Python27\lib\site-packages\django\core\handlers\base.py", line 151, in get_response
+    % (callback.__module__, view_name))
+ValueError: The view blog.views.GameView didn't return an HttpResponse object. It returned None instead.
+[2016-08-06 10:20:49,878] [ERROR] base : Internal Server Error: /blog/game/
+Traceback (most recent call last):
+  File "D:\Python27\lib\site-packages\django\core\handlers\base.py", line 151, in get_response
+    % (callback.__module__, view_name))
+ValueError: The view blog.views.GameView didn't return an HttpResponse object. It returned None instead.
+[2016-08-06 10:20:49,878] [ERROR] base : Internal Server Error: /blog/game/
+Traceback (most recent call last):
+  File "D:\Python27\lib\site-packages\django\core\handlers\base.py", line 151, in get_response
+    % (callback.__module__, view_name))
+ValueError: The view blog.views.GameView didn't return an HttpResponse object. It returned None instead.
+[2016-08-06 12:42:11,211] [ERROR] base : Internal Server Error: /blog/game/
+Traceback (most recent call last):
+  File "D:\Python27\lib\site-packages\django\core\handlers\base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python27\lib\site-packages\django\views\generic\base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\Python27\lib\site-packages\django\views\generic\base.py", line 89, in dispatch
+    return handler(request, *args, **kwargs)
+  File "H:\Code\Python\Git\blog_fx\blog_server\blog\views.py", line 135, in post
+    if Game.objects.get(id = 2).exists() :
+AttributeError: 'Game' object has no attribute 'exists'
+[2016-08-06 12:42:11,211] [ERROR] base : Internal Server Error: /blog/game/
+Traceback (most recent call last):
+  File "D:\Python27\lib\site-packages\django\core\handlers\base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python27\lib\site-packages\django\views\generic\base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\Python27\lib\site-packages\django\views\generic\base.py", line 89, in dispatch
+    return handler(request, *args, **kwargs)
+  File "H:\Code\Python\Git\blog_fx\blog_server\blog\views.py", line 135, in post
+    if Game.objects.get(id = 2).exists() :
+AttributeError: 'Game' object has no attribute 'exists'
+[2016-08-06 12:56:20,437] [ERROR] base : Internal Server Error: /blog/game/add/
+Traceback (most recent call last):
+  File "D:\Python27\lib\site-packages\django\core\handlers\base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python27\lib\site-packages\django\views\generic\base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\Python27\lib\site-packages\django\views\generic\base.py", line 89, in dispatch
+    return handler(request, *args, **kwargs)
+  File "H:\Code\Python\Git\blog_fx\blog_server\blog\views.py", line 192, in post
+    circle = _circle.de,
+AttributeError: 'str' object has no attribute 'de'
+[2016-08-06 12:56:20,437] [ERROR] base : Internal Server Error: /blog/game/add/
+Traceback (most recent call last):
+  File "D:\Python27\lib\site-packages\django\core\handlers\base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python27\lib\site-packages\django\views\generic\base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\Python27\lib\site-packages\django\views\generic\base.py", line 89, in dispatch
+    return handler(request, *args, **kwargs)
+  File "H:\Code\Python\Git\blog_fx\blog_server\blog\views.py", line 192, in post
+    circle = _circle.de,
+AttributeError: 'str' object has no attribute 'de'
+[2016-08-06 12:56:24,618] [ERROR] base : Internal Server Error: /blog/game/add/
+Traceback (most recent call last):
+  File "D:\Python27\lib\site-packages\django\core\handlers\base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python27\lib\site-packages\django\views\generic\base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\Python27\lib\site-packages\django\views\generic\base.py", line 89, in dispatch
+    return handler(request, *args, **kwargs)
+  File "H:\Code\Python\Git\blog_fx\blog_server\blog\views.py", line 192, in post
+    circle = _circle.de,
+AttributeError: 'str' object has no attribute 'de'
+[2016-08-06 12:56:24,618] [ERROR] base : Internal Server Error: /blog/game/add/
+Traceback (most recent call last):
+  File "D:\Python27\lib\site-packages\django\core\handlers\base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python27\lib\site-packages\django\views\generic\base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\Python27\lib\site-packages\django\views\generic\base.py", line 89, in dispatch
+    return handler(request, *args, **kwargs)
+  File "H:\Code\Python\Git\blog_fx\blog_server\blog\views.py", line 192, in post
+    circle = _circle.de,
+AttributeError: 'str' object has no attribute 'de'
+[2016-08-06 12:56:59,529] [ERROR] base : Internal Server Error: /blog/game/add/
+Traceback (most recent call last):
+  File "D:\Python27\lib\site-packages\django\core\handlers\base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python27\lib\site-packages\django\views\generic\base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\Python27\lib\site-packages\django\views\generic\base.py", line 89, in dispatch
+    return handler(request, *args, **kwargs)
+  File "H:\Code\Python\Git\blog_fx\blog_server\blog\views.py", line 192, in post
+    circle = _circle.de,
+AttributeError: 'str' object has no attribute 'de'
+[2016-08-06 12:56:59,529] [ERROR] base : Internal Server Error: /blog/game/add/
+Traceback (most recent call last):
+  File "D:\Python27\lib\site-packages\django\core\handlers\base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python27\lib\site-packages\django\views\generic\base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\Python27\lib\site-packages\django\views\generic\base.py", line 89, in dispatch
+    return handler(request, *args, **kwargs)
+  File "H:\Code\Python\Git\blog_fx\blog_server\blog\views.py", line 192, in post
+    circle = _circle.de,
+AttributeError: 'str' object has no attribute 'de'

@@ -12,3 +12,9 @@ class GalleryAdmin(admin.ModelAdmin):
 
 admin.site.register(User,UserAdmin)
 admin.site.register(Gallery,GalleryAdmin)
+
+
+class GameAdmin(admin.ModelAdmin):
+    list_display = ('id',)
+
+admin.site.register(Game,GameAdmin)
