@@ -125,7 +125,7 @@ ActiveCircle = {
           this.secondSelectCircle = null;
 
         }
-        return ;
+        //return ;
       }
     }
     //查询圆在数组中位置
@@ -135,13 +135,17 @@ ActiveCircle = {
         if(arr[i] == element)
           return i;
     }
+
+    if (this.circles.length == 0)
+          GameOver()
   }
+
 
 };
 
 //页面初始化
 var ac ;
-window.onload = function() {
+var Load = function() {
   ac = ActiveCircle;
   ac.Init("canvas");
 
@@ -161,7 +165,7 @@ window.onload = function() {
   //Todo post获取数据
 
   circle_data_arr =[
-      {x: 84, y: 117, radius: 57, color: "#456ab6", isSelected: false},
+      //{x: 84, y: 117, radius: 57, color: "#456ab6", isSelected: false},
       {x: 122, y: 151, radius: 54, color: "green", isSelected: false},
       {x: 44, y: 99, radius: 37, color: "green", isSelected: false}
   ];

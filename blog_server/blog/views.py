@@ -134,13 +134,13 @@ class GameView(BaseMixin, ListView):
     def post(self, request, *args, **kwargs):
 
         # if Game.objects.get(id = 2).exists() :
-        g = Game.objects.get(id = 5)
+        g = Game.objects.get(id = 14)
         # print g.circle
         dict = {
-            'circle' : g.circle,
-            'color' : g.color,
-            'img_url' : g.img_url,
-            'str_url' : g.str_url,
+            # 'circle' : g.circle,
+            # 'color' : g.color,
+            # 'img_url' : g.img_url,
+            # 'str_url' : g.str_url,
             'stage' : g.stage
         }
         # print str(dict)
@@ -187,14 +187,20 @@ class GameAddView(BaseMixin, ListView):
         _str_url = str(self.request.POST.get('str_url', ''))
         _stage = str(self.request.POST.get('stage', ''))
 
+
+        _stage_data = str(self.request.POST.get('stage_data', ''))
+
+        print _stage_data
+
         print _circle,_stage
 
         g = Game(
-            circle = _circle.encode('utf-8') ,
-            color = _color,
-            img_url = _img_url,
-            str_url = _str_url,
-            stage = _stage
+            # circle = _circle.encode('utf-8') ,
+            # color = _color,
+            # img_url = _img_url,
+            # str_url = _str_url,
+            # stage = _stage
+            stage = _stage_data
         )
         g.save()
 

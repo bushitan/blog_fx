@@ -41,79 +41,63 @@ canvas {
 </body>
 
 <script language="javascript" type="text/javascript">
-		//创建note
-		$('#add').click(function() {
-            $.ajax({
-                type: "POST",
-                url: '/blog/game/',
-{#                data:{  "img_url":"http://127.0.0.1:8000/static/art/img/20160706154153.png"},#}
-				success:function(data,textStatus){
+        var img_url ;
+		//游戏技术
+        function GameOver()
+        {
+            $(".background").css('background', 'url('+img_url+')');
+            $(".background").css('background-size', '100% 100%'); //背景铺满
+        }
+{#        $('#add').click(function() {})#}
+        $(document).ready(function(){
 
-                    console.log(data);
-                    data_json = JSON.parse(data);
-                    console.log(data_json);
-{#                    data_json = data;#}
-                    //设置舞台大小
-                    or_width = data_json['stage']['width'];
-                    or_height = data_json['stage']['height'];
-                    stage_rate_h_w = parseFloat(or_height/or_width); //背景图高宽比
-                    stage_width = $("#canvas").prop('width'); //舞台width 不变
-                    stage_height = parseInt(stage_width * stage_rate_h_w); //舞台height 自适应
+                $.ajax({
+                    type: "POST",
+                    url: '/blog/game/',
+    {#                data:{  "img_url":"http://127.0.0.1:8000/static/art/img/20160706154153.png"},#}
+                    success:function(data,textStatus){
+                        data_json = JSON.parse(data['stage']);
+                        console.log(data_json);
+    {#                    data_json = data;#}
+                        //设置舞台大小
+                        or_width = data_json['stage']['width'];
+                        or_height = data_json['stage']['height'];
+                        stage_rate_h_w = parseFloat(or_height/or_width); //背景图高宽比
+                        stage_width = $("#canvas").prop('width'); //舞台width 不变
+                        stage_height = parseInt(stage_width * stage_rate_h_w); //舞台height 自适应
+                        stage_rate_w_orw = parseFloat(stage_width/or_width); //舞台与原始舞台增长比
 
-                    stage_rate_w_orw = parseFloat(stage_width/or_width); //舞台与原始舞台增长比
+                        //游戏结束，跳转的图片链接
+                        img_url = data_json['img_url'];
 
-                    //更改canvas，bgdiv的高
-                    $(".background").css('height', stage_height);
-                    $("#canvas").prop('height',stage_height);
+                        //更改canvas，bgdiv的高
+                        $(".background").css('height', stage_height);
+                        $("#canvas").prop('height',stage_height);
 
+                        $(".background").css('background', 'url('+data_json['str_url']+')');
+                        $(".background").css('background-size', '100% 100%'); //背景铺满
 
-                    $(".background").css('background', 'url('+data_json['str_url']+')');
-                    $(".background").css('background-size', '100% 100%'); //背景铺满
+                        Load();
 
-
-{#                    c1 = data_json['circle'][0][0];#}
-{#                    c2 = data_json['circle'][1][0];#}
-{#                    c3 = data_json['circle'][1][1];#}
-{##}
-{##}
-{#                    color1 = data_json['color'][0];#}
-{#                    color2 = data_json['color'][1];#}
-{##}
-{##}
-{#                    circle_data_arr =[#}
-{#                          {x: c1.x , y:c1.y , radius: 57, color: color1, isSelected: false},#}
-{#                          {x: c2.x, y: c2.y, radius: 20, color: color1, isSelected: false},#}
-{#                          {x: c3.x, y: c3.y, radius: 37, color: color2, isSelected: false}#}
-{#                    ];#}
-
-
-
-                    circle_data_arr =[]
-
-{#                    for (var i=0;i<data_json['circle'].length;i++)#}
-                    for (var i in data_json['circle'])
-                        for (var j=0;j<data_json['circle'][i].length;j++)
-                        {
-                            c2 = data_json['circle'][i][j];
-                            color1 = data_json['color'][i];
-                            circle_data_arr.push({
-                                x: c2.x * stage_rate_w_orw,
-                                y: c2.y * stage_rate_w_orw,
-                                radius: c2.r * stage_rate_w_orw,
-                                color: color1,
-                                isSelected: false})
-                        }
-
-                    ac.Add(circle_data_arr);
-{#					window.location.href = data.url;#}
-				},
-				error:function(XMLHttpRequest, textStatus, errorThrown){
-					alert(XMLHttpRequest.responseText);
-				}
-
-            })
-
-        })
-
+                        circle_data_arr =[]; //增加的圆圈数组
+                        for (var i in data_json['circle'])
+                            for (var j=0;j<data_json['circle'][i].length;j++)
+                            {
+                                c2 = data_json['circle'][i][j];
+                                color1 = data_json['color'][i];
+                                circle_data_arr.push({
+                                    x: c2.x * stage_rate_w_orw,
+                                    y: c2.y * stage_rate_w_orw,
+                                    radius: c2.r * stage_rate_w_orw,
+                                    color: color1,
+                                    isSelected: false})
+                            }
+{#                        ac.Add(circle_data_arr);#}
+                    },
+                    error:function(XMLHttpRequest, textStatus, errorThrown){
+                        alert(XMLHttpRequest.responseText);
+                    }
+                })
+        });
 </script>
 </html>
