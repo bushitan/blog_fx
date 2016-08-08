@@ -150,7 +150,7 @@ var Load = function() {
   ac.Init("canvas");
 
   document.getElementById('canvas').addEventListener("click", canvas_click);
-  document.getElementById('clear').addEventListener("click", canvas_clear);
+  //document.getElementById('clear').addEventListener("click", canvas_clear);
   function canvas_click(e)
   {
     var clickX = e.pageX - this.offsetLeft;
@@ -169,7 +169,7 @@ var Load = function() {
       {x: 122, y: 151, radius: 54, color: "green", isSelected: false},
       {x: 44, y: 99, radius: 37, color: "green", isSelected: false}
   ];
-  ac.Add(circle_data_arr)
+  //ac.Add(circle_data_arr)
 };
 
 

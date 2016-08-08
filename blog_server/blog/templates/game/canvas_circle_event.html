@@ -22,8 +22,10 @@ canvas {
 <script src="/static/jquery/jquery-2.1.3.min.js"></script>
 
 <body>
-
-    <div class="background" style="background-image: url(http://7xsark.com1.z0.glb.clouddn.com/str/20160806003904);background-size: 100% 100%; width: 300px; height: 300px;">
+    <h2>
+        <div id="banner" style="text-align:center;"></div>
+    </h2>
+    <div id="content" class="background" style="background-image: url(http://7xsark.com1.z0.glb.clouddn.com/str/20160806003904);background-size: 100% 100%; width: 300px; height: 300px;">
 
         <canvas id="canvas" width="300px" height="300px" style="width:100%;height:100%">
         </canvas>
@@ -33,8 +35,8 @@ canvas {
   <div>
 {#    <button onclick="addRandomCircle()">Add Circle</button>#}
 {#    <button onclick="clearCanvas()">Clear Canvas</button>#}
-    <button id="add">Add Circle</button>
-    <button id="clear">Clear Canvas</button>
+{#    <button id="add">Add Circle</button>#}
+{#    <button id="clear">Clear Canvas</button>#}
   </div>
 
 
@@ -42,15 +44,23 @@ canvas {
 
 <script language="javascript" type="text/javascript">
         var img_url ;
+
 		//游戏技术
         function GameOver()
         {
             $(".background").css('background', 'url('+img_url+')');
             $(".background").css('background-size', '100% 100%'); //背景铺满
+            $("#banner").text("Victory !");
+        }
+        function Init(){
+            $("#content").css('width', document.body.offsetWidth);
+{#            $("#canvas").css('width', document.body.offsetWidth);#}
+            $("#canvas").prop('width', document.body.offsetWidth);
+
         }
 {#        $('#add').click(function() {})#}
         $(document).ready(function(){
-
+                Init(),
                 $.ajax({
                     type: "POST",
                     url: '/blog/game/{{ game_id }}',
@@ -79,19 +89,48 @@ canvas {
 
                         Load();
 
-                        circle_data_arr =[]; //增加的圆圈数组
-                        for (var i in data_json['circle'])
-                            for (var j=0;j<data_json['circle'][i].length;j++)
-                            {
-                                c2 = data_json['circle'][i][j];
-                                color1 = data_json['color'][i];
-                                circle_data_arr.push({
-                                    x: c2.x * stage_rate_w_orw,
-                                    y: c2.y * stage_rate_w_orw,
-                                    radius: c2.r * stage_rate_w_orw,
-                                    color: color1,
-                                    isSelected: false})
-                            }
+                        //增加基础颜色圆圈
+                        base_color_list = ["green", "blue", "red", "yellow", "magenta", "orange", "brown", "purple", "pink"];
+                        base_color_list = ["green", "blue", "red", "yellow",  "orange", "brown",  "pink"];
+                        base_circle = [];
+                        for (var j = 0 ; j<2 ; j++ ) //每种颜色2个圈
+                            for (var i = 0; i<base_color_list.length;i++) //基础圆圈
+                                base_circle.push({
+                                        x: parseInt( Math.random()*stage_width ), //适当缩小圆心范围
+                                        y: parseInt( Math.random()*stage_height ),
+                                        radius:  parseInt(( Math.random()*16+8 ) * stage_rate_w_orw),
+                                        color: base_color_list[i],
+                                        isSelected: false
+                                })
+                        ac.Add(base_circle);
+
+                        //增加主要颜色,选择前3种
+                        main_color_list = [data_json['color'][0],data_json['color'][1],data_json['color'][2]];
+                        main_circle =[]; //增加的圆圈数组
+                        for (var j = 0 ; j<2 ; j++ ) //每种颜色2个圈
+                            for (var i = 0; i<main_color_list.length;i++) //基础圆圈
+                                main_circle.push({
+                                        x: parseInt( Math.random()*stage_width ), //适当缩小圆心范围
+                                        y: parseInt( Math.random()*stage_height ),
+                                        radius:  parseInt(( Math.random()*6+4 ) * stage_rate_w_orw),
+                                        color: main_color_list[i],
+                                        isSelected: false
+                                })
+                        ac.Add(main_circle);
+
+{#                        circle_data_arr =[]; //增加的圆圈数组#}
+{#                        for (var i in data_json['circle'])#}
+{#                            for (var j=0;j<data_json['circle'][i].length;j++)#}
+{#                            {#}
+{#                                c2 = data_json['circle'][i][j];#}
+{#                                color1 = data_json['color'][i];#}
+{#                                circle_data_arr.push({#}
+{#                                    x: c2.x * stage_rate_w_orw,#}
+{#                                    y: c2.y * stage_rate_w_orw,#}
+{#                                    radius: c2.r * stage_rate_w_orw,#}
+{#                                    color: color1,#}
+{#                                    isSelected: false})#}
+{#                            }#}
 {#                        ac.Add(circle_data_arr);#}
                     },
                     error:function(XMLHttpRequest, textStatus, errorThrown){
