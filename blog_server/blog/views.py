@@ -119,11 +119,10 @@ class GameView(BaseMixin, ListView):
 
     def get_context_data(self, **kwargs):
         #查open_id 下，所有的图片做展示
-        _open_id = self.kwargs.get('open_id', '')
-        print _open_id,'ok'
-        if User.objects.filter(openid_wx = _open_id).exists():
-            user = User.objects.get(openid_wx = _open_id)
-            kwargs['gallery'] = Gallery.objects.filter(user = user)
+        _game_id = self.kwargs.get('game_id', '')
+        print _game_id,'ok'
+        if Game.objects.filter(id = _game_id).exists():
+            kwargs['game_id'] = _game_id
         return super(GameView, self).get_context_data(**kwargs)
     def get_queryset(self):
         pass
@@ -132,9 +131,9 @@ class GameView(BaseMixin, ListView):
 
     #跟数据库拿数据
     def post(self, request, *args, **kwargs):
-
+        _game_id = self.request.POST.get('game_id', '')
         # if Game.objects.get(id = 2).exists() :
-        g = Game.objects.get(id = 14)
+        g = Game.objects.get(id = _game_id)
         # print g.circle
         dict = {
             # 'circle' : g.circle,
@@ -205,7 +204,7 @@ class GameAddView(BaseMixin, ListView):
         g.save()
 
         return HttpResponse(
-            json.dumps({'a':1}),
+            json.dumps({'game_id':g.id}),
             content_type="application/json"
         )
 

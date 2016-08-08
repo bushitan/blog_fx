@@ -11,8 +11,11 @@ if __name__ == '__main__':
         #2、跟新blog的数据库
 
         url = 'http://127.0.0.1:8000/grid/api/game/'
-        # data  = {  "img_url":"http://127.0.0.1:8000/static/art/img/20160706154153.png"}
-        data  = {  "img_url":"http://127.0.0.1:8000/static/art/img/1370454329.jpg"}
+        # url = 'http://120.27.97.33:91/grid/api/game/'
+        data  = {  "img_url":"http://127.0.0.1:8000/static/art/img/20160706154153.png"}
+        # data  = {  "img_url":"http://127.0.0.1:8000/static/art/img/1370454329.jpg"}
+
+        data  = {  "img_url":"http://avatar.csdn.net/3/5/5/1_n289950578.jpg"}
         req = urllib2.Request(url)
         data = urllib.urlencode(data)
         #enable cookie
@@ -21,6 +24,7 @@ if __name__ == '__main__':
 
         # stage_json = json.loads( response.read() ) #字符串变json
         stage_data =  response.read() #所有数据全部存储
+        print stage_data
         # print obj
         # print  len(stage_data)
 

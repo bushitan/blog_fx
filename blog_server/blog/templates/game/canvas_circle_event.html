@@ -53,8 +53,8 @@ canvas {
 
                 $.ajax({
                     type: "POST",
-                    url: '/blog/game/',
-    {#                data:{  "img_url":"http://127.0.0.1:8000/static/art/img/20160706154153.png"},#}
+                    url: '/blog/game/{{ game_id }}',
+                    data:{  "game_id":"{{ game_id }}"},
                     success:function(data,textStatus){
                         data_json = JSON.parse(data['stage']);
                         console.log(data_json);
