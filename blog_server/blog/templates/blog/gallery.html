@@ -2,28 +2,174 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
     <title>画廊</title>
 </head>
 <body>
 
-{% for g in gallery%}
+{#{% for g in gallery%}#}
 {#    <p>{{ g.user }}</p>#}
-    <p><b>你的画廊</b></p>
-    <p>
-       {{ g.create_time }}
-    </p>
-    <p style="width:100%;height: auto">
-        <a>
+{#    <p><b>你的画廊</b></p>#}
+{#    <p>#}
+{#       {{ g.create_time }}#}
+{#    </p>#}
+{#    <p style="width:100%;height: auto">#}
+{#        <a>#}
+{##}
+{#            <img src="{{ g.img_url }}" style="width:49%;height: auto">#}
+{#        </a>#}
+{#        <a>#}
+{##}
+{#            <img src="{{ g.char_img_url }}" style="width:49%;height: auto">#}
+{#        </a>#}
+{#    </p>#}
+{#    <br>#}
+{##}
+{#{% endfor %}#}
 
-            <img src="{{ g.img_url }}" style="width:49%;height: auto">
-        </a>
-        <a>
 
-            <img src="{{ g.char_img_url }}" style="width:49%;height: auto">
-        </a>
-    </p>
-    <br>
+<div class="container">
+        <style>
+			ul.timeline {
+				list-style-type: none;
+{#				background: url("http://fineui.com/res/img/version_line.png") repeat-y scroll 120px 0 transparent;#}
+				background: url("/static/img/ling_bg.png") repeat-y scroll 0px 0 transparent;
+{#				margin: 50px 0;#}
+				padding: 0;
+			}
 
-{% endfor %}
+			ul.timeline li {
+				position: relative;
+				margin-bottom: 20px;
+			}
+			ul.timeline li .time {
+				position: absolute;
+				width: 200px;
+				text-align: left;
+				left: 70px;
+{#				top: 10px;#}
+				color: #999;
+                border-bottom: 1px solid black;;
+			}
+			ul.timeline li .version {
+				position: absolute;
+				width: 290px;
+				text-align: right;
+				left: -200px;
+				top: 30px;
+				font-size: 40px;
+				line-height: 50px;
+				color: #3594cb;
+				overflow: hidden;
+			}
+			ul.timeline li .number {
+				position: absolute;
+				background: url("/static/img/circle_18.png") no-repeat scroll 0 0 transparent;
+				width: 18px;
+				height: 18px;
+				left: 30px;
+{#				line-height: 56px;#}
+				text-align: center;
+				color: #fff;
+{#				font-size: 13px;#}
+			}
+			ul.timeline li.alt .number {
+				background-image: url("http://fineui.com/res/img/version_dot_alt.png");
+			}
+
+			ul.timeline li .content {
+{#				margin-left: 10px;#}
+                padding: 20px 0px 0px;
+                margin: 20px 25px 10px;
+
+			}
+{#			ul.timeline li .content pre {#}
+{#				background-color: #3594cb;#}
+{#				padding: 20px;#}
+{#				color: #fff;#}
+{#				font-size: 13px;#}
+{#				line-height: 20px;#}
+{#			}#}
+{#			ul.timeline li.alt .content pre {#}
+{#				background-color: #43B1F1;#}
+{#			}#}
+
+
+			a.number {
+				position: absolute;
+				background: url("http://fineui.com/res/img/version_dot.png") no-repeat scroll 0 0 transparent;
+				width: 56px;
+				height: 56px;
+				left: 97px;
+				line-height: 56px;
+				text-align: center;
+				color: #fff;
+				font-size: 18px;
+			}
+		</style>
+
+
+{#		<a href="/story/1">于谦</a>#}
+{#		<a href="/add/story"><button >增加故事</button></a>#}
+		<ul class="timeline">
+            {% for g in gallery%}
+            <li>
+                <div class="time">{{ g.create_time }}</div>
+                <div class="version"></div>
+                <div class="number">{{g.id}}</div>
+                <div class="content">
+{#                        <pre>梁太祖朱温<br><br><br><br><br><br><br><br></pre>#}
+                    <div>
+                        <p style="width:100%;height: auto">
+                            <a >
+                                <img src="{{ g.img_url }}" style="width: 45%;height: auto">
+                            </a>
+                            <a style="width: 49%;height: auto">
+                                <img src="{{ g.char_img_url }}" style="width: 45%;height: auto">
+                            </a>
+                        </p>
+
+                    </div>
+                </div>
+            </li>
+
+
+        {% endfor %}
+{#            <li>#}
+{#                <div class="time">2016.08.02 - 5:18 p.m.</div>#}
+{#                <div class="version"></div>#}
+{#                <div class="number">2</div>#}
+{#                <div class="content">#}
+{#                        <pre>梁太祖朱温<br><br><br><br><br><br><br><br></pre>#}
+{#                    <div>#}
+{#                        <p style="width:100%;height: auto">#}
+{#                            <a >#}
+{#                                <img src="/static/img/h.jpg" style="width: 45%;height: auto">#}
+{#                            </a>#}
+{#                            <a style="width: 49%;height: 100%  position: absolute; left: 0; top: 0; right: 0; bottom: 0;    margin: auto;">#}
+{#                                <img src="/static/img/s.jpg" style="width: 45%;height: auto">#}
+{#                            </a>#}
+{#                        </p>#}
+{##}
+{#                    </div>#}
+{#                </div>#}
+{#            </li>#}
+
+
+
+{#			<li class="alt"><div class="time">923年-936年</div><div class="version"></div><div class="number">后唐</div><div class="content"><pre><br><br><br>唐庄宗李存勖#}
+{#			唐庄宗李存勖 唐庄宗李存勖 唐庄宗李存勖 唐庄宗李存勖 唐庄宗李存勖 唐庄宗李存勖 唐庄宗李存勖 唐庄宗李存勖 唐庄宗李存勖 唐庄宗李存勖 唐庄宗李存勖 </pre></div></li>#}
+{#				<li><div class="time">936年-947年</div><div class="version"></div><div class="number">后晋</div><div class="content"><pre>晋高祖石敬瑭</pre></div></li>#}
+{#			<li class="alt"><div class="time">947年-951年</div><div class="version"></div><div class="number">后汉</div><div class="content"><pre>汉<br><br><br>高祖刘知远</pre></div></li>#}
+
+		</ul>
+
+		<!--<div style="margin-left:180px;">-->
+			<!--<button id="fetchNextData" class="btn btn-large btn-info" style="width:100%;">后二十条数据</button>-->
+		<!--</div>-->
+        <!--<br>-->
+		<!--<br>-->
+    </div>
 </body>
 </html>
