@@ -6,6 +6,7 @@
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
     <title>画廊</title>
 </head>
+<script src="/static/jquery/jquery-2.1.3.min.js"></script>
 <body>
 
 {#{% for g in gallery%}#}
@@ -34,7 +35,9 @@
 			ul.timeline {
 				list-style-type: none;
 {#				background: url("http://fineui.com/res/img/version_line.png") repeat-y scroll 120px 0 transparent;#}
-				background: url("/static/img/ling_bg.png") repeat-y scroll 0px 0 transparent;
+				background: url("/static/img/color_grid.jpg") repeat-y scroll 0px 0 transparent;
+{#                background-position:-62px -32px;#}
+{#                overflow:hidden#}
 {#				margin: 50px 0;#}
 				padding: 0;
 			}
@@ -50,7 +53,7 @@
 				left: 70px;
 {#				top: 10px;#}
 				color: #999;
-                border-bottom: 1px solid black;;
+{#                border-bottom: 1px solid black;;#}
 			}
 			ul.timeline li .version {
 				position: absolute;
@@ -65,7 +68,9 @@
 			}
 			ul.timeline li .number {
 				position: absolute;
-				background: url("/static/img/circle_18.png") no-repeat scroll 0 0 transparent;
+				background: url("/static/img/color_line.jpg") no-repeat scroll 0 0 transparent;
+{#                background-position:-162px -32px;#}
+                border-radius:18px;
 				width: 18px;
 				height: 18px;
 				left: 30px;
@@ -81,7 +86,7 @@
 			ul.timeline li .content {
 {#				margin-left: 10px;#}
                 padding: 20px 0px 0px;
-                margin: 20px 25px 10px;
+                margin: 20px 10px 0px 40px;
 
 			}
 {#			ul.timeline li .content pre {#}
@@ -112,12 +117,16 @@
 
 {#		<a href="/story/1">于谦</a>#}
 {#		<a href="/add/story"><button >增加故事</button></a>#}
-		<ul class="timeline">
+		<ul class="timeline" >
             {% for g in gallery%}
             <li>
-                <div class="time">{{ g.create_time }}</div>
+                <div class="time" >
+                    <div>{{ g.create_time }}</div>
+                    <div id="mark_line_{{g.id}}" style="width: 220px ; height: 1px; background: url('/static/img/color_line.jpg') no-repeat scroll 0 0 transparent; "></div>
+                </div>
                 <div class="version"></div>
-                <div class="number">{{g.id}}</div>
+                <div class="number" id="mark_{{g.id}}">{{g.id}}</div>
+{#                <div>3472389</div>#}
                 <div class="content">
 {#                        <pre>梁太祖朱温<br><br><br><br><br><br><br><br></pre>#}
                     <div>
@@ -125,7 +134,7 @@
                             <a >
                                 <img src="{{ g.img_url }}" style="width: 45%;height: auto">
                             </a>
-                            <a style="width: 49%;height: auto">
+                            <a >
                                 <img src="{{ g.char_img_url }}" style="width: 45%;height: auto">
                             </a>
                         </p>
@@ -172,4 +181,54 @@
 		<!--<br>-->
     </div>
 </body>
+
+<script language="javascript" type="text/javascript">
+var mark_list = [] ;
+var mark_line_list = [] ;
+{% for g in gallery%}
+     mark_list.push('mark_'+ {{ g.id }});
+     mark_line_list.push('mark_line_'+ {{ g.id }});
+{% endfor %}
+
+var imgdefereds=[];
+$('img').each(function(){
+ var dfd=$.Deferred();
+ $(this).bind('load',function(){
+ dfd.resolve();
+ }).bind('error',function(){
+ //图片加载错误，加入错误处理
+ // dfd.resolve();
+ })
+ if(this.complete) setTimeout(function(){
+ dfd.resolve();
+ },1000);
+ imgdefereds.push(dfd);
+})
+$.when.apply(null,imgdefereds).done(function(){
+  callback();
+});
+
+function callback(){
+    for(var i=0;i<mark_list.length;i++)
+    {
+    {#    _dom = document.getElementById(mark_list[i]);#}
+        _dom = $("#"+mark_list[i]);
+        _offsetY = _dom.offset().top;
+        if (_offsetY > 750 )
+            _offsetY = _offsetY % 750;
+        _dom.css('background-position','0px -'+_offsetY +'px');
+
+{#        _dom.css('background-position','0px -'+_offsetY +'px');#}
+    {#    _dom.css('background-position', "0px -89px");#}
+
+        _dom = $("#"+mark_line_list[i]);
+        _offsetY = _dom.offset().top;
+        if (_offsetY > 750 )
+            _offsetY = _offsetY % 750;
+        _dom.css('background-position','0px -'+_offsetY +'px');
+    {#    _dom.css('background-position','-162px -68px')#}
+    }
+}
+
+</script>
 </html>
