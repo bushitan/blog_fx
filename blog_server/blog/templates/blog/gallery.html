@@ -81,7 +81,7 @@
                 border-radius:18px;
 				width: 18px;
 				height: 18px;
-				left: 30px;
+				left: 27px;
                 top:26px;
 				line-height: 20px;
 				text-align: center;
@@ -135,14 +135,14 @@
 {#                <div class="">#}
                     <div class="time" >
                         <div>{{ g.create_time }}</div>
-
                     </div>
                     <div class="version">
-                        <div id="mark_line_{{g.id}}" style="width: 30px ; height: 1px; background: url('/static/img/color_line.jpg') repeat-x scroll 0 0 transparent; ">
+                        <div id="mark_line_{{g.id}}" style="width: 20px ; height: 1px; background: url('/static/img/color_line.jpg') repeat-x scroll 0 0 transparent; ">
 
                         </div>
                     </div>
                     <div class="number" id="mark_{{g.id}}">{{g.id}}</div>
+                    <div class="hole-top-right"></div>
     {#                <div>3472389</div>#}
                     <div class="content ">
     {#                        <pre>梁太祖朱温<br><br><br><br><br><br><br><br></pre>#}
@@ -157,6 +157,11 @@
                                 <a >
                                     <img src="{{ g.char_img_url }}" class="img-artwork ">
                                 </a>
+                            </div>
+                            <div class="col-xs-12">
+
+                                <div class="hole-bottom-left"></div>
+                                <div class="hole-bottom-right"></div>
                             </div>
     {#                        <p style="width:100%;height: auto">#}
     {#                            <a >#}
