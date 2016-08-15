@@ -20,10 +20,24 @@ body{
     border-radius:5px;
 }
 .img-box{
-    padding: 20px 0 20px 0
+    padding: 35px 0 20px 0
 }
 
 .img-modal-show{
     width: 100%;
     height: auto;
+}
+
+.gallery-node{
+    background-color: #ffffff;
+    /*padding: 20px;*/
+    margin-right: 0px;
+    margin-left: 0px;
+    /*border-radius:5px;*/
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    /*position: relative;*/
+    /*left: 15px;*/
+    /*right:15px;*/
+    /*z-index: 100000;*/
 }
