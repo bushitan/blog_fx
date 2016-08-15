@@ -22,3 +22,8 @@ body{
 .img-box{
     padding: 20px 0 20px 0
 }
+
+.img-modal-show{
+    width: 100%;
+    height: auto;
+}
