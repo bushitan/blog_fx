@@ -1,0 +1,61 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <title></title>
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/artwork_show.css" rel="stylesheet">
+</head>
+<script src="/static/jquery/jquery-2.1.3.min.js"></script>
+<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+<body>
+{#<body>#}
+
+
+
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="img_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-show="true" data-backdrop="static">
+       <div class="modal-dialog">
+          <div class="modal-content">
+
+             <div class="modal-header" >
+{#                <button type="button" class="close"#}
+{#                   data-dismiss="modal" aria-hidden="true">#}
+{#                      &times;#}
+{#                </button>#}
+                    <p class="modal-title" id="myModalLabel">
+                        <strong>F.X.</strong>
+                    </p>
+             </div>
+{#             <div class="modal-body">#}
+                <div>
+                    <a>
+                        {% if url %}
+                        <img src="{{url}}" style="width:100%;height: auto" />
+                        {% endif %}
+                    </a>
+                </div>
+{#             </div>#}
+             <div class="modal-footer">
+                 <a href="http://120.27.97.33:82/blog/gallery/?open_id={{ open_id}}">
+                     <strong>私密画廊</strong>
+                     <span class="glyphicon glyphicon-arrow-right"></span>
+                 </a>
+    {#            <button type="button" class="btn btn-default"#}
+    {#               data-dismiss="modal">关闭#}
+    {#            </button>#}
+    {#            <button type="button" class="btn btn-primary">#}
+    {#               提交更改#}
+    {#            </button>#}
+             </div>
+          </div><!-- /.modal-content -->
+       </div><!-- /.modal -->
+    </div>
+</body>
+
+<script language="javascript" type="text/javascript">
+    $('#img_modal').modal('show');
+</script>
+
+</html>

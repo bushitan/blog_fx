@@ -24,6 +24,8 @@ canvas {
 <body>
     <h2>
         <div id="banner" style="text-align:center;"></div>
+        <div id="time" > </div>
+        <button id="restart" style="display: none" >再试一次</button>
     </h2>
     <div id="content" class="background" style="background-image: url(http://7xsark.com1.z0.glb.clouddn.com/str/20160806003904);background-size: 100% 100%; width: 300px; height: 300px;">
 
@@ -33,6 +35,7 @@ canvas {
 
 
   <div>
+
 {#    <button onclick="addRandomCircle()">Add Circle</button>#}
 {#    <button onclick="clearCanvas()">Clear Canvas</button>#}
 {#    <button id="add">Add Circle</button>#}
@@ -44,23 +47,56 @@ canvas {
 
 <script language="javascript" type="text/javascript">
         var img_url ;
-
+        var timer;
+        var time_max = 1000 * 1 ;
+        var sleep = 16;
 		//游戏技术
         function GameOver()
         {
             $(".background").css('background', 'url('+img_url+')');
             $(".background").css('background-size', '100% 100%'); //背景铺满
             $("#banner").text("Victory !");
+
+            $("#time").css('display','none');
+            $("#restart").css('display','none');
+            //结束游戏
+            window.clearInterval(timer);
+        }
+
+        function GameFalse()
+        {
+{#            timer.window.setInterval("GameLoop()",sleep);#}
+
+            $("#time").css('display','none');
+            $("#restart").css('display','');
+
+            //结束游戏
+            window.clearInterval(timer);
+        }
+
+        function GameLoop()
+        {
+            time_max = time_max - sleep;
+            if(time_max<0)
+            {
+                time_max = 0;
+                GameFalse();
+            }
+            $("#time").text(time_max/1000);
+
         }
         function Init(){
             $("#content").css('width', document.body.offsetWidth);
 {#            $("#canvas").css('width', document.body.offsetWidth);#}
             $("#canvas").prop('width', document.body.offsetWidth);
 
+            timer = window.setInterval("GameLoop()",sleep);
+            //设置时间
+
         }
 {#        $('#add').click(function() {})#}
         $(document).ready(function(){
-                Init(),
+                Init(),//初始化画布尺寸
                 $.ajax({
                     type: "POST",
                     url: '/blog/game/{{ game_id }}',
@@ -136,7 +172,12 @@ canvas {
                     error:function(XMLHttpRequest, textStatus, errorThrown){
                         alert(XMLHttpRequest.responseText);
                     }
+                }),
+                $("#restart").click(function(){
+{#                    location.reload(false);#}
+                    location.reload();
                 })
+
         });
 </script>
 </html>

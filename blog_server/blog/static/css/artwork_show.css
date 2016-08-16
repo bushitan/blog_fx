@@ -1,0 +1,20 @@
+body{
+    font-family: Microsoft YaHei,'宋体' , Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
+    background-image: url('/static/img/bg_img_bar.jpg');
+}
+a:link{text-decoration:none; color:#333;  /* 指正常的未被访问过的链接*/
+}a:visited{text-decoration:none; color:#333;/*指已经访问过的链接*/
+}a:hover{text-decoration:none;color:#333;/*指鼠标在链接*/}
+a:active{text-decoration:none;color:#333;/* 指正在点的链接*/
+}
+.modal-header{
+
+    background-color: #808080;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.modal-footer{
+    background-color: #808080;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
