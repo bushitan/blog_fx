@@ -4,7 +4,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
     <title></title>
-</head>
+  <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/artwork_show.css" rel="stylesheet">
+    </head>
 <style>
 body {
   font-family: Verdana;
@@ -12,43 +14,75 @@ body {
 }
 canvas {
   cursor: pointer;
-  border: 1px solid black;
+{#  border: 1px solid black;#}
 }
 
 </style>
 
 {#<script src="/static/js/similar_color.js"></script>#}
+
 <script src="/static/js/active_circle.js"></script>
 <script src="/static/jquery/jquery-2.1.3.min.js"></script>
+<script src="/static/bootstrap/js/bootstrap.min.js"></script>
 
 <body>
-    <h2>
-        <div id="banner" style="text-align:center;"></div>
-        <div id="time" > </div>
-        <button id="restart" style="display: none" >再试一次</button>
-    </h2>
-    <div id="content" class="background" style="background-image: url(http://7xsark.com1.z0.glb.clouddn.com/str/20160806003904);background-size: 100% 100%; width: 300px; height: 300px;">
+{#    <h2>#}
+{#        <div id="banner" style="text-align:center;"></div>#}
+{#        <div id="time" > </div>#}
+{#        <button id="restart" style="display: none" >再试一次</button>#}
+{#    </h2>#}
+{#    <div id="content" class="background" style="background-image: url(http://7xsark.com1.z0.glb.clouddn.com/str/20160806003904);background-size: 100% 100%; width: 300px; height: 300px;">#}
+{##}
+{#        <canvas id="canvas" width="300px" height="300px" style="width:100%;height:100%">#}
+{#        </canvas>#}
+{#    </div>#}
 
-        <canvas id="canvas" width="300px" height="300px" style="width:100%;height:100%">
-        </canvas>
+    <div class="modal fade" id="img_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-show="true" data-backdrop="static">
+        <div class="modal-dialog">
+          <div class="modal-content">
+
+             <div class="modal-header"  style="border-bottom:0px solid;">
+        {#                <button type="button" class="close"#}
+        {#                   data-dismiss="modal" aria-hidden="true">#}
+        {#                      &times;#}
+        {#                </button>#}
+                    <p class="modal-title" id="myModalLabel">
+                        <strong><div id="banner" ></div></strong>
+                        <div id="time" > </div>
+                        <button id="restart" style="display: none" > 再试一次</button>
+                    </p>
+             </div>
+        {#             <div class="modal-body">#}
+               <div id="content" class="background" style="background-image: url(http://7xsark.com1.z0.glb.clouddn.com/str/20160806003904);background-size: 100% 100%; width: 300px; height: 300px;">
+                    <canvas id="canvas" width="300px" height="300px" style="width:100%;height:100%">
+                    </canvas>
+                </div>
+        {#             </div>#}
+             <div class="modal-footer" style="border-top:0px solid;">
+{#                 <a href="http://120.27.97.33:82/blog/gallery/?open_id={{ open_id}}">#}
+{#                     <strong>私密画廊</strong>#}
+{#                     <span class="glyphicon glyphicon-arrow-right"></span>#}
+{#                 </a>#}
+        {#            <button type="button" class="btn btn-default"#}
+        {#               data-dismiss="modal">关闭#}
+        {#            </button>#}
+        {#            <button type="button" class="btn btn-primary">#}
+        {#               提交更改#}
+        {#            </button>#}
+             </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
     </div>
 
-
-  <div>
-
-{#    <button onclick="addRandomCircle()">Add Circle</button>#}
-{#    <button onclick="clearCanvas()">Clear Canvas</button>#}
-{#    <button id="add">Add Circle</button>#}
-{#    <button id="clear">Clear Canvas</button>#}
-  </div>
 
 
 </body>
 
 <script language="javascript" type="text/javascript">
+
         var img_url ;
         var timer;
-        var time_max = 1000 * 1 ;
+        var time_max = 1000 * 20 ;
         var sleep = 16;
 		//游戏技术
         function GameOver()
@@ -86,9 +120,9 @@ canvas {
 
         }
         function Init(){
-            $("#content").css('width', document.body.offsetWidth);
+            $("#content").css('width', document.body.offsetWidth - 22);
 {#            $("#canvas").css('width', document.body.offsetWidth);#}
-            $("#canvas").prop('width', document.body.offsetWidth);
+            $("#canvas").prop('width', document.body.offsetWidth - 22);
 
             timer = window.setInterval("GameLoop()",sleep);
             //设置时间
@@ -96,6 +130,7 @@ canvas {
         }
 {#        $('#add').click(function() {})#}
         $(document).ready(function(){
+                $('#img_modal').modal('show'),
                 Init(),//初始化画布尺寸
                 $.ajax({
                     type: "POST",
