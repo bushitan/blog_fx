@@ -68,10 +68,10 @@ class GalleryView(BaseMixin, ListView):
 
 
 #增加新作品
-class ArtworkView(BaseMixin, ListView):
+class ArtworkAddView(BaseMixin, ListView):
     def get_context_data(self, **kwargs):
         # pass
-        return super(ArtworkView, self).get_context_data(**kwargs)
+        return super(ArtworkAddView, self).get_context_data(**kwargs)
     def get_queryset(self):
         pass
     def post(self, request, *args, **kwargs):
@@ -110,6 +110,23 @@ class ArtworkView(BaseMixin, ListView):
 
         #添加2条url
         # pass
+
+class ArtworkShowView(BaseMixin, ListView):
+    template_name = 'blog/show.html'
+    url = ''
+    open_id = ''
+    def get_context_data(self, **kwargs):
+        kwargs['url'] = self.url
+        kwargs['open_id'] = self.open_id
+
+        # print kwargs['url']
+        return super(ArtworkShowView, self).get_context_data(**kwargs)
+    def get_queryset(self):
+        pass
+    def get(self, request, *args, **kwargs):
+        self.url = request.GET.get('url')
+        self.open_id = request.GET.get('open_id')
+        return super(ArtworkShowView, self).get(request, *args, **kwargs)
 
 import httplib, urllib,urllib2
 #小游戏
