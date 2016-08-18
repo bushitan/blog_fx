@@ -18,9 +18,11 @@ a:active{text-decoration:none;color:#333;/* 指正在点的链接*/
     background-color: #808080;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
+    border-top: 0;
 }
 .modal-body{
     padding: 0px;
+    border: 0;
 }
 
 .layer-grid{

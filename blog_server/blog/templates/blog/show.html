@@ -20,20 +20,29 @@
           <div class="modal-content">
 
              <div class="modal-header" >
-{#                <button type="button" class="close"#}
-{#                   data-dismiss="modal" aria-hidden="true">#}
-{#                      &times;#}
-{#                </button>#}
-                    <p class="modal-title" id="myModalLabel">
+                <div class="row clear ">
+                    <div class="col-xs-8">
+                        <span class="modal-title" id="myModalLabel">
                         <strong>F.X.</strong>
-                    </p>
+                    </span>
+                    </div>
+                    <div class="col-xs-4"  style="text-align:right">
+                         <span>
+                            <input type="checkbox" id="choice_radio_checkbox" /><span>原图</span>
+                        </span>
+                    </div>
+                </div>
+
+
              </div>
              <div class="modal-body">
                     <a>
-                        {% if url %}
-                            <img id="str_img" src="{{url}}" style="width:100%;height: auto" />
+                        {% if str_img %}
+                            <img id="str_img" src="{{str_img}}" style="width:100%;height: auto" />
                         {% endif %}
-
+                        {% if origin_img %}
+                            <img id="origin_img" src="{{origin_img}}" style="width:100%;height: auto;display: none" />
+                        {% endif %}
                         <canvas id="canvas_grid" width="0px" height="0px" class="layer-grid" style="display: none;"></canvas>
                         <canvas id="canvas_9_gong" width="0px" height="0px" class="layer-grid" style="display: none;"></canvas>
                     </a>
@@ -190,6 +199,15 @@
             $("#canvas_grid").css('display','');
         if (_value == '9')
             $("#canvas_9_gong").css('display','');
+    })
+    $("#choice_radio_checkbox").change(function() {
+        var isChecked = $('#choice_radio_checkbox').is(':checked');
+        $("#str_img").css('display','none');
+        $("#origin_img").css('display','none');
+        if( isChecked )  //选中，显示原图
+            $("#origin_img").css('display','');
+        else //未选中，显示字符画
+            $("#str_img").css('display','');
     })
 
 
