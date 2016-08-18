@@ -12,9 +12,25 @@ a:active{text-decoration:none;color:#333;/* 指正在点的链接*/
     background-color: #808080;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+    border-bottom: 0;
 }
 .modal-footer{
     background-color: #808080;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
+}
+.modal-body{
+    padding: 0px;
+}
+
+.layer-grid{
+    /*border: 1px black;*/
+    /*background-color: #204d74;*/
+    /*filter:alpha(opacity=50);*/
+    /*display: none;*/
+    position: absolute;
+    /*right: 0px;*/
+    top:0px;
+    left:0px;
+
 }

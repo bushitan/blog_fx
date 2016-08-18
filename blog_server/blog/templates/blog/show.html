@@ -28,26 +28,33 @@
                         <strong>F.X.</strong>
                     </p>
              </div>
-{#             <div class="modal-body">#}
-                <div>
+             <div class="modal-body">
                     <a>
                         {% if url %}
-                        <img src="{{url}}" style="width:100%;height: auto" />
+                            <img id="str_img" src="{{url}}" style="width:100%;height: auto" />
                         {% endif %}
+
+                        <canvas id="canvas_grid" width="0px" height="0px" class="layer-grid" style="display: none;"></canvas>
+                        <canvas id="canvas_9_gong" width="0px" height="0px" class="layer-grid" style="display: none;"></canvas>
                     </a>
-                </div>
-{#             </div>#}
+             </div>
              <div class="modal-footer">
-                 <a href="http://120.27.97.33:82/blog/gallery/?open_id={{ open_id}}">
-                     <strong>私密画廊</strong>
-                     <span class="glyphicon glyphicon-arrow-right"></span>
+                 <div class="row clear ">
+                      <div class="col-xs-8">
+                          <div style="text-align:left">
+                              <span>辅格：</span>
+                             <input type="radio" class="radioItem" name="gride_check" value="0" checked="true"><span>无</span>
+                             <input type="radio" class="radioItem" name="gride_check" value="4"><span>方格</span>
+                             <input type="radio" class="radioItem" name="gride_check" value="9"><span>九宫</span>
+                         </div>
+                      </div>
+                      <div class="col-xs-4">
+                          <a href="http://120.27.97.33:82/blog/gallery/?open_id={{ open_id}}">
+                             <strong>私密画廊</strong>
+                         <span class="glyphicon glyphicon-arrow-right"></span>
                  </a>
-    {#            <button type="button" class="btn btn-default"#}
-    {#               data-dismiss="modal">关闭#}
-    {#            </button>#}
-    {#            <button type="button" class="btn btn-primary">#}
-    {#               提交更改#}
-    {#            </button>#}
+                      </div>
+                 </div>
              </div>
           </div><!-- /.modal-content -->
        </div><!-- /.modal -->
@@ -56,6 +63,138 @@
 
 <script language="javascript" type="text/javascript">
     $('#img_modal').modal('show');
+
+    var imgdefereds=[];
+    $('img').each(function(){
+         var dfd=$.Deferred();
+         $(this).bind('load',function(){
+            dfd.resolve();
+         }).bind('error',function(){
+         //图片加载错误，加入错误处理
+         // dfd.resolve();
+         })
+         if(this.complete)
+             setTimeout(function(){
+                dfd.resolve();
+             },1000);
+         imgdefereds.push(dfd);
+    });
+    $.when.apply(null,imgdefereds).done(function(){
+        ImgComplete();
+    });
+
+    function ImgComplete()
+    {
+        CanvasInit();
+        DrawGrid();
+        Draw9Gong();
+    }
+
+    function CanvasInit()
+    {
+        _c_width = $("#str_img").prop('width');
+        _c_height  =  $("#str_img").prop('height');
+        //方块格子
+        $("#canvas_grid").prop('width',_c_width);
+        $("#canvas_grid").prop('height',_c_height);
+        //九宫
+        $("#canvas_9_gong").prop('width',_c_width);
+        $("#canvas_9_gong").prop('height',_c_height);
+    }
+    function DrawGrid()
+    {
+        var canvas = document.getElementById("canvas_grid");
+        var context = canvas.getContext("2d");
+
+        _line_list = GetLine(canvas.width,canvas.height);
+
+        context.globalAlpha = 0.85;
+        context.beginPath();
+{#        context.arc(5, 10, 30, 0, Math.PI * 2);#}
+        DrawLine(context,_line_list);
+{#        context.fillStyle = "#204d74";#}
+        context.strokeStyle = "#333";
+        context.lineWidth = 1;
+        context.fill();
+        context.stroke();
+
+        function GetLine(width,height)
+        {
+            numX = 4; //X方向格子数
+            offX = width % numX / 2; //X方向的偏移量
+            length = (width - offX * 2) / numX;  //格子长度
+            numY = parseInt(height / length);  //Y方向数量
+            offY = height % length / 2; //Y方向偏移量
+
+            _lines = [];
+            for (i=0;i<numY+1;i++) //横线
+                _lines.push( [offX,offY + length*i,offX + length * numX , offY + length*i] )
+            for (i=0;i<numX+1;i++) //竖线
+                _lines.push( [offX + length * i,offY,offX + length * i , offY + length * numY] )
+            return _lines
+        }
+        function DrawLine(context,lines)
+        {
+{#            context#}
+            for (i=0;i<lines.length;i++)
+            {
+                context.moveTo(lines[i][0],lines[i][1]);
+                context.lineTo(lines[i][2],lines[i][3]);
+
+            }
+
+        }
+    }
+    function Draw9Gong()
+    {
+        var canvas = document.getElementById("canvas_9_gong");
+        var context = canvas.getContext("2d");
+
+        _line_list = GetLine(canvas.width,canvas.height);
+        context.globalAlpha = 0.85;
+        context.beginPath();
+        DrawLine(context,_line_list);
+{#        context.fillStyle = "#204d74";#}
+        context.strokeStyle = "#333";
+        context.lineWidth = 1;
+        context.fill();
+        context.stroke();
+
+        function GetLine(width,height)
+        {
+            _lines = [];
+            h_1 = height/3;
+            h_2 = height*2/3;
+            w_1 = width/3;
+            w_2 = width*2/3;
+            _lines.push( [0,h_1 , width,h_1] );
+            _lines.push( [0,h_2 , width,h_2] );
+            _lines.push( [w_1 ,0 ,w_1 ,height ] );
+            _lines.push( [w_2 ,0 ,w_2, height ] );
+            return _lines
+        }
+        function DrawLine(context,lines)
+        {
+            for (i=0;i<lines.length;i++)
+            {
+                context.moveTo(lines[i][0],lines[i][1]);
+                context.lineTo(lines[i][2],lines[i][3]);
+            }
+        }
+    }
+    $(".radioItem").change(function(){
+        var _value = $("input[name='gride_check']:checked").val();
+        $("#canvas_grid").css('display','none');
+        $("#canvas_9_gong").css('display','none');
+        if (_value == '4')
+            $("#canvas_grid").css('display','');
+        if (_value == '9')
+            $("#canvas_9_gong").css('display','');
+    })
+
+
 </script>
+
+
 
 </html>
