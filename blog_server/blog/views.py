@@ -113,10 +113,13 @@ class ArtworkAddView(BaseMixin, ListView):
 
 class ArtworkShowView(BaseMixin, ListView):
     template_name = 'blog/show.html'
-    url = ''
+    str_img = ''
+    origin_img = ''
     open_id = ''
     def get_context_data(self, **kwargs):
-        kwargs['url'] = self.url
+        kwargs['str_img'] = self.str_img
+        kwargs['origin_img'] = self.origin_img
+
         kwargs['open_id'] = self.open_id
 
         # print kwargs['url']
@@ -124,7 +127,8 @@ class ArtworkShowView(BaseMixin, ListView):
     def get_queryset(self):
         pass
     def get(self, request, *args, **kwargs):
-        self.url = request.GET.get('url')
+        self.str_img = request.GET.get('str_img')
+        self.origin_img = request.GET.get('origin_img')
         self.open_id = request.GET.get('open_id')
         return super(ArtworkShowView, self).get(request, *args, **kwargs)
 
