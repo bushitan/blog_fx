@@ -52,11 +52,15 @@ class GalleryView(BaseMixin, ListView):
         # _open_id = self.kwargs.get('open_id', '')
         _open_id = self.open_id
         if User.objects.filter(openid_wx = _open_id).exists():
-            print 1
+            # print 1
             user = User.objects.get(openid_wx = _open_id)
-            print user
+            # print user
             kwargs['gallery'] = Gallery.objects.filter(user = user)
-            print kwargs['gallery']
+            kwargs['gallery_artwork_count'] = Gallery.objects.filter(user = user).count()
+            kwargs['gallery_artwork_increase'] = 3
+
+            # print kwargs['gallery']
+            # print 'count:',kwargs['gallery_artwork_count']
 
         return super(GalleryView, self).get_context_data(**kwargs)
     def get_queryset(self):

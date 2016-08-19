@@ -222,6 +222,12 @@
 </body>
 
 <script language="javascript" type="text/javascript">
+//分批次加载
+var artwork_count = {{ gallery_artwork_count }};
+var artwork_index = 0;
+var artwork_increase = {{ gallery_artwork_increase }};
+
+
 var mark_list = [] ;
 var mark_line_list = [] ;
 {% for g in gallery%}
