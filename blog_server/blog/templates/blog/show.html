@@ -21,12 +21,15 @@
 
              <div class="modal-header" >
                 <div class="row clear ">
-                    <div class="col-xs-8">
+                    <div class="col-xs-6">
                         <span class="modal-title" id="myModalLabel">
                         <strong>F.X.</strong>
                     </span>
                     </div>
-                    <div class="col-xs-4"  style="text-align:right">
+                    <div class="col-xs-6"  style="text-align:right">
+                        <span>
+                            <input type="checkbox" id="animation_radio_checkbox" /><span>交替动画</span>
+                        </span>
                          <span>
                             <input type="checkbox" id="choice_radio_checkbox" /><span>原图</span>
                         </span>
@@ -199,7 +202,8 @@
             $("#canvas_grid").css('display','');
         if (_value == '9')
             $("#canvas_9_gong").css('display','');
-    })
+    });
+    //字符画<->原图 切换
     $("#choice_radio_checkbox").change(function() {
         var isChecked = $('#choice_radio_checkbox').is(':checked');
         $("#str_img").css('display','none');
@@ -208,8 +212,40 @@
             $("#origin_img").css('display','');
         else //未选中，显示字符画
             $("#str_img").css('display','');
-    })
+    });
 
+
+    var animation_timer;
+    var animation_sleep = 300;
+    var animation_step = 0;
+    //交替动画
+    $("#animation_radio_checkbox").change(function() {
+        var isChecked = $('#animation_radio_checkbox').is(':checked');
+        if (isChecked)
+        {
+            animation_timer = window.setInterval("AnimationStrOrigin()",animation_sleep);
+        }
+        else
+        {
+            window.clearInterval(animation_timer);
+        }
+    });
+
+    function AnimationStrOrigin()
+    {
+        _step = animation_step%4;
+        animation_step++;
+        if (_step == 0)
+        {
+            $("#str_img").css('display','none');
+            $("#origin_img").css('display','');
+        }
+        else
+        {
+            $("#str_img").css('display','');
+            $("#origin_img").css('display','none');
+        }
+    }
 
 </script>
 
