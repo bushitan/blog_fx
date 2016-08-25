@@ -33,6 +33,7 @@ class Gallery(models.Model):
     create_time = models.DateTimeField(u'创建时间', auto_now_add=True)
     img_url =  models.CharField(max_length=200, verbose_name=u'原图地址')
     char_img_url = models.CharField(max_length=200, verbose_name=u'字符画地址')
+    sketch_url = models.CharField(max_length=200, verbose_name=u'字符画地址',null=True)
     class Meta:
         verbose_name_plural = verbose_name = u'画廊'
         ordering = ['-create_time']

@@ -82,6 +82,7 @@ class ArtworkAddView(BaseMixin, ListView):
         _open_id = self.request.POST.get('open_id', '')
         _img_url = self.request.POST.get('img_url', '')
         _char_img_url = self.request.POST.get('char_img_url', '')
+        _sketch_url = self.request.POST.get('sketch_url', '')
 
 
         #查 open_id 是否存在
@@ -101,7 +102,8 @@ class ArtworkAddView(BaseMixin, ListView):
         g = Gallery(
             user = user,
             img_url = _img_url,
-            char_img_url = _char_img_url
+            char_img_url = _char_img_url,
+            sketch_url = _sketch_url
         )
         g.save()
 
@@ -119,10 +121,12 @@ class ArtworkShowView(BaseMixin, ListView):
     template_name = 'blog/show.html'
     str_img = ''
     origin_img = ''
+    sketch_img = ''
     open_id = ''
     def get_context_data(self, **kwargs):
         kwargs['str_img'] = self.str_img
         kwargs['origin_img'] = self.origin_img
+        kwargs['sketch_img'] = self.sketch_img
 
         kwargs['open_id'] = self.open_id
 
@@ -133,7 +137,9 @@ class ArtworkShowView(BaseMixin, ListView):
     def get(self, request, *args, **kwargs):
         self.str_img = request.GET.get('str_img')
         self.origin_img = request.GET.get('origin_img')
+        self.sketch_img = request.GET.get('sketch_img')
         self.open_id = request.GET.get('open_id')
+
         return super(ArtworkShowView, self).get(request, *args, **kwargs)
 
 import httplib, urllib,urllib2
