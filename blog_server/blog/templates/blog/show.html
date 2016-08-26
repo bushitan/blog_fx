@@ -112,8 +112,9 @@
 
     function CanvasInit()
     {
-        _c_width = $("#str_img").prop('width');
-        _c_height  =  $("#str_img").prop('height');
+        //默认显示的img 大小为主
+        _c_width = $("#sketch_img").prop('width');
+        _c_height  =  $("#sketch_img").prop('height');
         //方块格子
         $("#canvas_grid").prop('width',_c_width);
         $("#canvas_grid").prop('height',_c_height);
@@ -133,7 +134,7 @@
 {#        context.arc(5, 10, 30, 0, Math.PI * 2);#}
         DrawLine(context,_line_list);
 {#        context.fillStyle = "#204d74";#}
-        context.strokeStyle = "#333";
+        context.strokeStyle = "#e1583c";
         context.lineWidth = 1;
         context.fill();
         context.stroke();
@@ -175,7 +176,7 @@
         context.beginPath();
         DrawLine(context,_line_list);
 {#        context.fillStyle = "#204d74";#}
-        context.strokeStyle = "#333";
+        context.strokeStyle = "#e1583c";
         context.lineWidth = 1;
         context.fill();
         context.stroke();
