@@ -11,6 +11,7 @@ import os
 import base64
 
 import sys
+from django.core import serializers
 
 # logger
 logger = logging.getLogger(__name__)
@@ -47,18 +48,21 @@ class GalleryView(BaseMixin, ListView):
     template_name = 'blog/gallery.html'
     # context_object_name = 'article_list'
     open_id = ''
+    artwork_increase = 5
     def get_context_data(self, **kwargs):
         #查open_id 下，所有的图片做展示
         # _open_id = self.kwargs.get('open_id', '')
-        _open_id = self.open_id
-        if User.objects.filter(openid_wx = _open_id).exists():
-            # print 1
-            user = User.objects.get(openid_wx = _open_id)
-            # print user
-            kwargs['gallery'] = Gallery.objects.filter(user = user)
-            kwargs['gallery_artwork_count'] = Gallery.objects.filter(user = user).count()
-            kwargs['gallery_artwork_increase'] = 3
+        # gallery_artwork_increase = 3
+        # if User.objects.filter(openid_wx = self.open_id).exists():
+        #     # print 1
+        #     user = User.objects.get(openid_wx = self.open_id)
+        #     # print user
+        #     _gallery = Gallery.objects.filter(user = user)
+        #     kwargs['gallery'] = _gallery
+        #     kwargs['gallery_artwork_count'] = len(_gallery)
+        #     kwargs['gallery_artwork_increase'] = gallery_artwork_increase
 
+        kwargs['open_id'] = self.open_id
             # print kwargs['gallery']
             # print 'count:',kwargs['gallery_artwork_count']
 
@@ -67,9 +71,49 @@ class GalleryView(BaseMixin, ListView):
         pass
     def get(self, request, *args, **kwargs):
         self.open_id = request.GET.get('open_id')
-
         return super(GalleryView, self).get(request, *args, **kwargs)
 
+    def post(self, request, *args, **kwargs):
+        _open_id = self.request.POST.get('open_id', '') #用户名
+        # _artwork_count = self.request.POST.get('artwork_count', '') #总量
+        _artwork_index = int(self.request.POST.get('artwork_index', '')) #当前索引
+
+        user = User.objects.get(openid_wx = _open_id)
+        _gallery = Gallery.objects.filter(user = user)
+        _artwork_count = len(_gallery)
+        print "ga:",len(_gallery)
+        #作品初始位置> 总数
+        if _artwork_index > _artwork_count:
+
+            stateDict = {
+                "state":'false',
+                "error":'index > count'
+            }
+            return HttpResponse(
+                json.dumps(stateDict),
+                content_type="application/json"
+            )
+
+        #索引+增长 > 最大值， 限定结束为最大值
+        _artwork_end = _artwork_index + self.artwork_increase
+        print _artwork_end
+        if _artwork_end > _artwork_count:
+            _artwork_end = _artwork_count
+        print _artwork_end
+        #截取要显示的序列，转json
+        _temp = _gallery[ _artwork_index : _artwork_end ]
+        _gallery_show = serializers.serialize("json", _temp)
+
+        stateDict = {
+            "state":'true',
+            "gallery_show":_gallery_show,
+            "artwork_index": _artwork_end,
+            "artwork_count": len(_gallery)
+        }
+        return HttpResponse(
+            json.dumps(stateDict),
+            content_type="application/json"
+        )
 
 #增加新作品
 class ArtworkAddView(BaseMixin, ListView):

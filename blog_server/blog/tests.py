@@ -3,7 +3,6 @@ import httplib, urllib,urllib2
 import json
 if __name__ == '__main__':
 
-    # http://127.0.0.1:8000/art/wx_img_str
     httpClient = None
     try:
         #此处微信使用

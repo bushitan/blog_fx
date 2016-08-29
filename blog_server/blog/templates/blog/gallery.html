@@ -131,53 +131,36 @@
 		<ul class="timeline" >
            
             {% for g in gallery%}
-            <li>
-{#                <div class="">#}
-                    <div class="time" >
-                        <div>{{ g.create_time }}</div>
-                    </div>
-                    <div class="version">
-                        <div id="mark_line_{{g.id}}" style="width: 20px ; height: 1px; background: url('/static/img/color_line.jpg') repeat-x scroll 0 0 transparent; ">
-
-                        </div>
-                    </div>
-                    <div class="number" id="mark_{{g.id}}">{{g.id}}</div>
-                    <div class="hole-top-right"></div>
-    {#                <div>3472389</div>#}
-                    <div class="content ">
-    {#                        <pre>梁太祖朱温<br><br><br><br><br><br><br><br></pre>#}
-                        <div class="row clear img-box gallery-node">
-{#                            <div class="col-xs-12">fjkdsfos</div>#}
-                            <div class="col-xs-6">
-                                <a >
-                                    <img src="{{ g.img_url }}" class="img-artwork">
-                                </a>
-                            </div>
-                            <div class="col-xs-6">
-                                <a >
-                                    <img src="{{ g.char_img_url }}" class="img-artwork ">
-                                </a>
-                            </div>
-                            <div class="col-xs-12">
-
-                                <div class="hole-bottom-left"></div>
-                                <div class="hole-bottom-right"></div>
-                            </div>
-    {#                        <p style="width:100%;height: auto">#}
-    {#                            <a >#}
-    {#                                <img src="{{ g.img_url }}" style="width: 45%;height: auto">#}
-    {#                            </a>#}
-    {#                            <a >#}
-    {#                                <img src="{{ g.char_img_url }}" style="width: 45%;height: auto">#}
-    {#                            </a>#}
-    {#                        </p>#}
-
-                        </div>
-                    </div>
-{#                </div>#}
-            </li>
-
-
+{#            <li>#}
+{#                    <div class="time" >#}
+{#                        <div>{{ g.create_time }}</div>#}
+{#                    </div>#}
+{#                    <div class="version">#}
+{#                        <div id="mark_line_{{g.id}}" style="width: 20px ; height: 1px; background: url('/static/img/color_line.jpg') repeat-x scroll 0 0 transparent; ">#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="number" id="mark_{{g.id}}">{{g.id}}</div>#}
+{#                    <div class="hole-top-right"></div>#}
+{#                    <div class="content ">#}
+{#                        <div class="row clear img-box gallery-node">#}
+{#                            <div class="col-xs-6">#}
+{#                                <a >#}
+{#                                    <img src="{{ g.img_url }}" class="img-artwork">#}
+{#                                </a>#}
+{#                            </div>#}
+{#                            <div class="col-xs-6">#}
+{#                                <a >#}
+{#                                    <img src="{{ g.char_img_url }}" class="img-artwork ">#}
+{#                                </a>#}
+{#                            </div>#}
+{#                            <div class="col-xs-12">#}
+{##}
+{#                                <div class="hole-bottom-left"></div>#}
+{#                                <div class="hole-bottom-right"></div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#            </li>#}
         {% endfor %}
 		</ul>
 
@@ -222,65 +205,162 @@
 </body>
 
 <script language="javascript" type="text/javascript">
-//分批次加载
-var artwork_count = {{ gallery_artwork_count }};
-var artwork_index = 0;
-var artwork_increase = {{ gallery_artwork_increase }};
 
+//浏览器底部监测
+var ajaxLoading = false;
+var docNode = $(document);
+ docNode.scroll(function() {
+    if(docNode.height() - $(window).height() - docNode.scrollTop() < 10) {
+        if(!ajaxLoading) {
+            if (artwork_index < artwork_count)
+                Get_Gallery_Show()
+        }
+    }
+});
+
+
+
+//分批次加载
+var artwork_index = 0;
+var artwork_count = 100;
+function Get_Gallery_Show()
+{
+    ajaxLoading = true;
+    $.ajax({
+        type: "POST",
+        url: '/blog/gallery/',
+        data:{
+            "open_id":"{{ open_id }}",
+            "artwork_index":artwork_index
+        },
+        success:function(data,textStatus){
+            console.log(data);
+            console.log(JSON.parse(data['gallery_show']));
+
+            //更改索引位置
+            artwork_index = data['artwork_index'];
+            artwork_count = data['artwork_count'];
+
+            //解析画廊显示数据
+            _gallery = JSON.parse(data['gallery_show']);
+            /*  _gallery[i]['pk']
+                _artwork = _gallery[i]['fields'];
+                _artwork['create_time']
+                _artwork['char_img_url']
+                _artwork['img_url']
+                _artwork['sketch_url']
+            */
+            for(var i = 0;i<_gallery.length;i++)
+            {
+                _artwork = _gallery[i]['fields'];
+                _dom_li = [
+                     '<li>',
+                            '<div class="time" >',
+                                '<div>'+_artwork['create_time']+'</div>',
+                            '</div>',
+                            '<div class="version">',
+                                '<div id="mark_line_'+ _gallery[i]['pk'] +'" style="width: 20px ; height: 1px; background: url(\'/static/img/color_line.jpg\') repeat-x scroll 0 0 transparent; ">',
+                                '</div>',
+                            '</div>',
+                            '<div class="number" id="mark_'+ _gallery[i]['pk'] + '">'+ _gallery[i]['pk'] +'</div>',
+                            '<div class="hole-top-right"></div>',
+                            '<div class="content ">',
+                                '<div class="row clear img-box gallery-node">',
+                                    '<div class="col-xs-6">',
+                                        '<a >',
+                                            '<img src="'+ _artwork['img_url'] +'" class="img-artwork">',
+                                        '</a>',
+                                    '</div>',
+                                    '<div class="col-xs-6">',
+                                        '<a >',
+                                            '<img src="'+ _artwork['char_img_url'] +'" class="img-artwork ">',
+                                        '</a>',
+                                    '</div>',
+                                    '<div class="col-xs-12">',
+                                        '<div class="hole-bottom-left"></div>',
+                                        '<div class="hole-bottom-right"></div>',
+                                    '</div>',
+                                '</div>',
+                            '</div>',
+                     '</li>',
+                ].join('');
+
+                $(".timeline").append(_dom_li);
+
+                //mark数组，动态适应背景颜色
+                mark_list.push('mark_'+ _gallery[i]['pk']);
+                mark_line_list.push('mark_line_'+ _gallery[i]['pk']);
+            }
+
+            AddListenImg();
+
+            //解绑loading状态
+            ajaxLoading = false;
+        },
+        error:function(XMLHttpRequest, textStatus, errorThrown){
+            alert(XMLHttpRequest.responseText);
+        }
+    });
+}
 
 var mark_list = [] ;
 var mark_line_list = [] ;
-{% for g in gallery%}
-     mark_list.push('mark_'+ {{ g.id }});
-     mark_line_list.push('mark_line_'+ {{ g.id }});
-{% endfor %}
-
 var imgdefereds=[];
-$('img').each(function(){
- var dfd=$.Deferred();
- $(this).bind('load',function(){
- dfd.resolve();
- }).bind('error',function(){
- //图片加载错误，加入错误处理
- // dfd.resolve();
- })
- if(this.complete) setTimeout(function(){
- dfd.resolve();
- },1000);
- imgdefereds.push(dfd);
-})
-$.when.apply(null,imgdefereds).done(function(){
-  ImgComplete();
-});
+
+//监听图片下载
+function AddListenImg(){
+    $('img').each(function(){
+     var dfd=$.Deferred();
+     $(this).bind('load',function(){
+     dfd.resolve();
+     }).bind('error',function(){
+     //图片加载错误，加入错误处理
+     // dfd.resolve();
+     });
+     if(this.complete) setTimeout(function(){
+     dfd.resolve();
+     },1000);
+     imgdefereds.push(dfd);
+    })
+    $.when.apply(null,imgdefereds).done(function(){
+      ImgComplete();
+    });
+}
 
 function ImgComplete(){
     for(var i=0;i<mark_list.length;i++)
     {
-    {#    _dom = document.getElementById(mark_list[i]);#}
+        //mark 圆 背景颜色自适应
         _dom = $("#"+mark_list[i]);
         _offsetY = _dom.offset().top;
         if (_offsetY > 750 )
             _offsetY = _offsetY % 750;
         _dom.css('background-position','0px -'+_offsetY +'px');
 
-{#        _dom.css('background-position','0px -'+_offsetY +'px');#}
-    {#    _dom.css('background-position', "0px -89px");#}
-
+        //mark_line 线 背景颜色自适应
         _dom = $("#"+mark_line_list[i]);
         _offsetY = _dom.offset().top;
         if (_offsetY > 750 )
             _offsetY = _offsetY % 750;
         _dom.css('background-position','0px -'+_offsetY +'px');
-    {#    _dom.css('background-position','-162px -68px')#}
     }
+
+    $("img").click(function(){
+        $('#img_modal').modal('show');
+        $('#img_modal_show').prop('src',this.src);
+    })
 }
 
-$("img").click(function(){
-{#    console.log(this.src);#}
 
-    $('#img_modal').modal('show');
-    $('#img_modal_show').prop('src',this.src);
-})
+
+
+function Init(){
+    Get_Gallery_Show();
+}
+Init();
+
+{# Get_Gallery_Show();#}
+{#Get_Gallery_Show();#}
 
 </script>
 </html>
