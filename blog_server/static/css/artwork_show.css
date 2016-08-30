@@ -1,0 +1,38 @@
+body{
+    font-family: Microsoft YaHei,'宋体' , Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
+    background-image: url('/static/img/bg_img_bar.jpg');
+}
+a:link{text-decoration:none; color:#333;  /* 指正常的未被访问过的链接*/
+}a:visited{text-decoration:none; color:#333;/*指已经访问过的链接*/
+}a:hover{text-decoration:none;color:#333;/*指鼠标在链接*/}
+a:active{text-decoration:none;color:#333;/* 指正在点的链接*/
+}
+.modal-header{
+
+    background-color: #808080;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom: 0;
+}
+.modal-footer{
+    background-color: #808080;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-top: 0;
+}
+.modal-body{
+    padding: 0px;
+    border: 0;
+}
+
+.layer-grid{
+    /*border: 1px black;*/
+    /*background-color: #204d74;*/
+    /*filter:alpha(opacity=50);*/
+    /*display: none;*/
+    position: absolute;
+    /*right: 0px;*/
+    top:0px;
+    left:0px;
+
+}
