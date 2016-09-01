@@ -80,7 +80,7 @@
 
             <h4>原图上传</h4>
             <div class="screen-tx">
-                <img id="tmp-tx"  src="" alt=""  >
+                <img id="tmp-tx"  src="" alt="" style="width: 100%;height: auto"  >
             </div>
              <form role="form" id="upload-tx-form">
                 <span class="form-group">
@@ -158,10 +158,12 @@ var image = new Image();
 image.crossOrigin = "Anonymous";
 var x,y,width,height = 0;
 
+console.log( $("#tmp-tx").prop('width') );
+
 $('#tmp-tx').Jcrop({onChange: updatePreview,
                     onSelect: updatePreview,
                     aspectRatio:1,
-                    boxWidth:400,
+                    boxWidth:$("#tmp-tx").prop('width'),
                     boxHeight:300},
                     function(){
                         jcrop_api = this;
