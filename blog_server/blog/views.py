@@ -186,6 +186,44 @@ class ArtworkShowView(BaseMixin, ListView):
 
         return super(ArtworkShowView, self).get(request, *args, **kwargs)
 
+
+
+class ArtworkHardView(BaseMixin, ListView):
+    template_name = 'blog/artwork_hard.html'
+
+    bg_img_url = ''
+    def get(self, request, *args, **kwargs):
+        print "get ArtworkHard"
+        self.bg_img_url = request.GET.get('bg_img_url', '')
+        # print 'a:',kwargs['bg_img_url']
+        return super(ArtworkHardView, self).get(request, *args, **kwargs)
+    def get_context_data(self, **kwargs):
+        kwargs['bg_img_url'] = self.bg_img_url
+        return super(ArtworkHardView, self).get_context_data(**kwargs)
+    def get_queryset(self):
+        pass
+    def post(self, request, *args, **kwargs):
+        print "post ArtworkHard"
+        img_data = request.POST['tx']
+
+        IMAGE_SERVER_HOST = 'http://120.27.97.33:91/'
+        # IMAGE_SERVER_HOST = 'http://127.0.0.1:8001/'
+        url = IMAGE_SERVER_HOST + 'grid/api/img_str_data/'
+        data  = {  "img_data": img_data}
+
+        # print url,data
+
+        req = urllib2.Request(url)
+        data = urllib.urlencode(data)
+        #enable cookie
+        opener = urllib2.build_opener(urllib2.HTTPCookieProcessor())
+        response = opener.open(req,data)
+        res = response.read()
+        print 'res:',res
+        return HttpResponse(res)
+
+
+
 import httplib, urllib,urllib2
 #小游戏
 class GameView(BaseMixin, ListView):

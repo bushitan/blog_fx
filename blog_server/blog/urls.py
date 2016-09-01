@@ -9,8 +9,11 @@ urlpatterns = [
 
    url(r'^gallery/$', GalleryView.as_view()),
 
-   url(r'^artwork/$', ArtworkAddView.as_view()),
-   url(r'^artwork/show/$', ArtworkShowView.as_view()),
+   url(r'^artwork/$', ArtworkAddView.as_view()), # 增加数据
+   url(r'^artwork/show/$', ArtworkShowView.as_view()), #普通模式
+   url(r'^artwork/hard/$', ArtworkHardView.as_view()), #高阶模式
+
+
 
    url(r'^game/(?P<game_id>\w+)$', GameView.as_view()),
    url(r'^game/add/$', GameAddView.as_view()),
