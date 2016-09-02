@@ -151,7 +151,10 @@ class ArtworkAddView(BaseMixin, ListView):
         )
         g.save()
 
-        mydict = {'state':1}
+        mydict = {
+            'state':1,
+            'gallery_id':g.id
+        }
         return HttpResponse(
             json.dumps(mydict),
             content_type="application/json"
@@ -167,22 +170,33 @@ class ArtworkShowView(BaseMixin, ListView):
     origin_img = ''
     sketch_img = ''
     open_id = ''
-    def get_context_data(self, **kwargs):
-        kwargs['str_img'] = self.str_img
-        kwargs['origin_img'] = self.origin_img
-        kwargs['sketch_img'] = self.sketch_img
 
+    gallery_id = ''
+    artwork = ''
+    def get_context_data(self, **kwargs):
+
+        # kwargs['str_img'] = self.str_img
+        # kwargs['origin_img'] = self.origin_img
+        # kwargs['sketch_img'] = self.sketch_img
+        kwargs['str_img'] = self.artwork.char_img_url
+        kwargs['origin_img'] = self.artwork.img_url
+        kwargs['sketch_img'] = self.artwork.sketch_url
         kwargs['open_id'] = self.open_id
 
+        # print 'artwork:',self.artwork.img_url
         # print kwargs['url']
         return super(ArtworkShowView, self).get_context_data(**kwargs)
     def get_queryset(self):
-        pass
+
+        self.artwork = Gallery.objects.get(id = self.gallery_id)
+        return
     def get(self, request, *args, **kwargs):
         self.str_img = request.GET.get('str_img')
         self.origin_img = request.GET.get('origin_img')
         self.sketch_img = request.GET.get('sketch_img')
         self.open_id = request.GET.get('open_id')
+
+        self.gallery_id = request.GET.get('gallery_id')
 
         return super(ArtworkShowView, self).get(request, *args, **kwargs)
 
