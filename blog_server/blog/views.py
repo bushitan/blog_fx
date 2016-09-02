@@ -181,9 +181,9 @@ class ArtworkShowView(BaseMixin, ListView):
         kwargs['str_img'] = self.artwork.char_img_url
         kwargs['origin_img'] = self.artwork.img_url
         kwargs['sketch_img'] = self.artwork.sketch_url
-        kwargs['open_id'] = self.open_id
+        kwargs['open_id'] = self.artwork.user
 
-        # print 'artwork:',self.artwork.img_url
+        # print 'artwork:',self.artwork.user
         # print kwargs['url']
         return super(ArtworkShowView, self).get_context_data(**kwargs)
     def get_queryset(self):
