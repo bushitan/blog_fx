@@ -39,7 +39,7 @@
 			ul.timeline {
 				list-style-type: none;
 {#				background: url("http://fineui.com/res/img/version_line.png") repeat-y scroll 120px 0 transparent;#}
-				background: url("/static/img/color_grid.jpg") repeat-y scroll 0px 0 transparent;
+				background: url("/static/img/color_grid.png") repeat-y scroll 0px 0 transparent;
 {#                background-position:-62px -32px;#}
 {#                overflow:hidden#}
 {#				margin: 50px 0;#}
@@ -333,15 +333,15 @@ function ImgComplete(){
         //mark 圆 背景颜色自适应
         _dom = $("#"+mark_list[i]);
         _offsetY = _dom.offset().top;
-        if (_offsetY > 750 )
-            _offsetY = _offsetY % 750;
+        if (_offsetY > 990 )
+            _offsetY = _offsetY % 990;
         _dom.css('background-position','0px -'+_offsetY +'px');
 
         //mark_line 线 背景颜色自适应
         _dom = $("#"+mark_line_list[i]);
         _offsetY = _dom.offset().top;
-        if (_offsetY > 750 )
-            _offsetY = _offsetY % 750;
+        if (_offsetY > 990 )
+            _offsetY = _offsetY % 990;
         _dom.css('background-position','0px -'+_offsetY +'px');
     }
 
