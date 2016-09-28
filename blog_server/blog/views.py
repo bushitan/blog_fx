@@ -346,5 +346,31 @@ class BoardView(BaseMixin, ListView):
     def get_queryset(self):
         pass
     def post(self, request, *args, **kwargs):
-        pass
+
+        bg_img = request.POST['bg_img']
+        gif_sprite_img = request.POST['gif_sprite_img']
+        print gif_sprite_img
+        img_data = request.POST['draw_img']
+
+        # IMAGE_SERVER_HOST = 'http://120.27.97.33:91/'
+        IMAGE_SERVER_HOST = 'http://127.0.0.1:8000/'
+        url = IMAGE_SERVER_HOST + 'grid/api/gif/mix/'
+        data  = {
+            "bg_img":bg_img,
+            "draw_img": img_data,
+            "gif_sprite_1":"a.png",
+            "gif_sprite_2":"b.png",
+            "gif_sprite_3":"c.png"
+        }
+
+        req = urllib2.Request(url)
+        data = urllib.urlencode(data)
+        #enable cookie
+        opener = urllib2.build_opener(urllib2.HTTPCookieProcessor())
+        response = opener.open(req,data)
+        res = response.read()
+        print 'res:',res
+
+        return HttpResponse(res)
+        # pass
 #画板
