@@ -103,10 +103,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
-STATICFILES_FINDERS =(
-    "django.contrib.staticfiles.finders.FileSystemFinder",
-    "django.contrib.staticfiles.finders.AppDirectoriesFinder"
-)
+# STATICFILES_FINDERS =(
+#     "django.contrib.staticfiles.finders.AppDirectoriesFinder"
+#     "django.contrib.staticfiles.finders.FileSystemFinder",
+# )
 
 # log配置
 LOG_FILE = "./all.log"

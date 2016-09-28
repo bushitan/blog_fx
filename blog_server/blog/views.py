@@ -335,3 +335,16 @@ class GameAddView(BaseMixin, ListView):
             content_type="application/json"
         )
 
+class BoardView(BaseMixin, ListView):
+    template_name = 'board/index.html'
+
+    def get(self, request, *args, **kwargs):
+        print request,"get"
+        return super(BoardView, self).get(request, *args, **kwargs)
+    def get_context_data(self, **kwargs):
+        return super(BoardView, self).get_context_data(**kwargs)
+    def get_queryset(self):
+        pass
+    def post(self, request, *args, **kwargs):
+        pass
+#画板
