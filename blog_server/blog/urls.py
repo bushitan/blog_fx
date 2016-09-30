@@ -19,4 +19,5 @@ urlpatterns = [
 
 
    url(r'^board/$', BoardView.as_view()),
+   url(r'^wx/$', WXView.as_view()),
 ]

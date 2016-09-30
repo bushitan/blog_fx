@@ -347,9 +347,11 @@ class BoardView(BaseMixin, ListView):
         pass
     def post(self, request, *args, **kwargs):
 
+        # print request
         bg_img = request.POST['bg_img']
+        print "bg_img:",bg_img
         gif_sprite_img = request.POST['gif_sprite_img']
-        print gif_sprite_img
+
         img_data = request.POST['draw_img']
 
         # IMAGE_SERVER_HOST = 'http://120.27.97.33:91/'
@@ -371,6 +373,35 @@ class BoardView(BaseMixin, ListView):
         res = response.read()
         print 'res:',res
 
-        return HttpResponse(res)
+        return HttpResponse("caonima ")
         # pass
 #画板
+
+
+class WXView(BaseMixin, ListView):
+    template_name = 'board/index.html'
+
+    def get(self, request, *args, **kwargs):
+        print request,"get"
+        bg_img = request.GET.get('bg_img', '')
+        draw_img = request.GET.get('draw_img')
+
+        data  = {
+            "bg_img":bg_img,
+            "draw_img": draw_img,
+            "gif_sprite_1":"a.png",
+            "gif_sprite_2":"b.png",
+            "gif_sprite_3":"c.png"
+        }
+        print data
+
+        # self.bg_img_url = request.GET.get('bg_img_url', '')
+        return HttpResponse("http://127.0.0.1:8000/static/mix/user.gif")
+        # return super(WXView, self).get(request, *args, **kwargs)
+    def get_context_data(self, **kwargs):
+        return super(WXView, self).get_context_data(**kwargs)
+    def get_queryset(self):
+        pass
+    def post(self, request, *args, **kwargs):
+
+        print request
